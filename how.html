@@ -46,9 +46,9 @@
       <p class="muted" style="font-size:18px">A model doesn't answer “22 µF”. It names an exact catalogue part — capacitance under DC bias, voltage rating, inductor saturation current — each tied to a datasheet page. Parts are recognised by what they connect to, not by their names, so renaming R8 to R1 changes nothing.</p>
     </div>
     <div class="reveal"><ul class="findings">
-        <li><span class="sev e">ERROR</span><span><code>T2.ISAT</code> — Isat 0.42 A &lt; peak current 1.254 A<span class="src">bourns_srn2012t.pdf, p.1</span></span></li>
-        <li><span class="sev e">ERROR</span><span><code>T2.L_RANGE</code> — L = 6.8 uH outside recommended 2.2-4.7 uH<span class="src">tps563201.pdf, Table 7-2</span></span></li>
-        <li><span class="sev w">WARN</span><span><code>T2.LOOP_IN</code> — input cap loop 4.80 mm &gt; 3 mm (VIN leg 2.15 mm, GND leg 4.80 mm)</span></li>
+        <li><span class="sev e">PROBLEM</span><span><b>The coil saturates.</b> At full load it has to carry 1.25 A at its peak; this coil handles 0.42 A.<span class="src">rule T2.ISAT · Bourns SRN2012T datasheet, p.1</span></span></li>
+        <li><span class="sev e">PROBLEM</span><span><b>Coil outside TI's range.</b> It's 6.8 µH; TI recommends 2.2–4.7 µH for a 3.3 V output.<span class="src">rule T2.L_RANGE · TI TPS563201 datasheet, table 7-2</span></span></li>
+        <li><span class="sev w">WATCH</span><span><b>Input capacitor far from the chip.</b> The input loop is 4.8 mm long; aim for under 3 mm.<span class="src">rule T2.LOOP_IN · our layout rule</span></span></li>
       </ul><p class="cap">Real checker output: the reference design with a deliberately undersized inductor swapped in.</p></div>
   </div>
 </section>
@@ -59,10 +59,10 @@
       <p>From the first real run, November 2026: DeepSeek designed the module from scratch. Its first answer broke one datasheet rule; the error went back verbatim, and the second answer passed.</p></div>
     <div class="compare">
       <figure class="reveal"><div class="lbl"><span class="dot bad"></span>Iteration 1 · rejected</div>
-        <ul class="findings" style="margin-top:12px"><li><span class="sev e">ERROR</span><span><code>T2.CIN_EFF</code> — Cin(eff@8.4V) = 7.00 uF &lt; min 10 uF<span class="src">one 10 µF / 25 V capacitor keeps only 7 µF at 8.4 V</span></span></li></ul>
+        <ul class="findings" style="margin-top:12px"><li><span class="sev e">PROBLEM</span><span><b>Not enough input capacity.</b> At full battery (8.4 V) its one 10 µF capacitor keeps only 7 µF; at least 10 µF is needed.<span class="src">rule T2.CIN_EFF · TI TPS563201 datasheet</span></span></li></ul>
         <figcaption style="margin-top:12px">Ceramic capacitors lose capacitance under voltage. The model picked one input capacitor; at the battery's full charge it isn't enough.</figcaption></figure>
       <figure class="reveal"><div class="lbl"><span class="dot good"></span>Iteration 2 · accepted</div>
-        <ul class="findings" style="margin-top:12px"><li><span class="sev w">WARN</span><span><code>T2.LOOP_IN</code> — input cap loop 9.11 mm &gt; 3 mm (VIN leg 6.46 mm, GND leg 9.11 mm)</span></li></ul>
+        <ul class="findings" style="margin-top:12px"><li><span class="sev w">WATCH</span><span><b>Input capacitor far from the chip.</b> The input loop is 9.1 mm long; aim for under 3 mm.<span class="src">rule T2.LOOP_IN · our layout rule</span></span></li></ul>
         <figcaption style="margin-top:12px">A second capacitor fixes the rule. The layout still carries a warning that no rule can settle — that's what Batch 0 measures.</figcaption></figure>
     </div>
   </div>

@@ -446,3 +446,4 @@ table.defects{width:100%;border-collapse:collapse;font-size:15px;min-width:640px
 .loop-key.loop-good{color:var(--good)}.loop-key.loop-warn{color:var(--amber)}.loop-key.loop-bad{color:var(--bad)}
 .loop-key.loop-good,.loop-key.loop-warn,.loop-key.loop-bad{stroke:none}
 .loop-line{stroke-width:.24;opacity:.85}
+.findings b{font-weight:600;color:var(--ink)}
