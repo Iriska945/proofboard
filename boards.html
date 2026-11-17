@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Boards · Proofboard</title>
-<meta name="description" content="The Samruk-1 boards that started Proofboard, and the first test module.">
-<meta property="og:title" content="Boards · Proofboard">
-<meta property="og:description" content="The Samruk-1 boards that started Proofboard, and the first test module.">
-<meta property="og:image" content="assets/img/sat_exploded.jpg">
+<title>Lab · Proofboard</title>
+<meta name="description" content="Batch 0: sixteen AI-designed, reference and known-defect boards on one panel, and the bench jig.">
+<meta property="og:title" content="Lab · Proofboard">
+<meta property="og:description" content="Batch 0: sixteen AI-designed, reference and known-defect boards on one panel, and the bench jig.">
+<meta property="og:image" content="assets/img/batch0_panel.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 32 32' aria-hidden='true'%3E%3Crect x='2.5' y='2.5' width='27' height='27' rx='7' fill='%231e3a5f'/%3E%3Cpath d='M8.5 21.5h6l3-11h6' stroke='%23f6ead2' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='8.5' cy='21.5' r='2.4' fill='%23e3a94e'/%3E%3Ccircle cx='23.5' cy='10.5' r='2.4' fill='%23e3a94e'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +21,7 @@
     <a class="brand" href="index.html" aria-label="Proofboard home"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2.5" y="2.5" width="27" height="27" rx="7" fill="#1e3a5f"/><path d="M8.5 21.5h6l3-11h6" stroke="#f6ead2" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8.5" cy="21.5" r="2.4" fill="#e3a94e"/><circle cx="23.5" cy="10.5" r="2.4" fill="#e3a94e"/></svg>Proofboard</a>
     <ul>
       <li><a href="how.html">How it works</a></li>
-      <li><a href="boards.html" aria-current="page">Boards</a></li>
+      <li><a href="boards.html" aria-current="page">Lab</a></li>
       <li><a href="roadmap.html">Roadmap</a></li>
       <li><a href="about.html">About</a></li>
     </ul>
@@ -31,29 +31,33 @@
 
 <div class="wrap">
   <header class="pagehead">
-    <span class="kicker">Boards</span>
-    <h1>Where the idea came from.</h1>
-    <p class="lede">Samruk-1 is a small atmospheric probe. Its four boards were designed in KiCad with an AI agent in the loop — and every one of them went through the slow loop of order, wait, solder, measure.</p>
+    <span class="kicker">Lab</span>
+    <h1>Sixteen boards, one panel, one honest score.</h1>
+    <p class="lede">Everything on this page was designed, checked and rendered by the Proofboard harness in November 2026. Nothing has been manufactured yet.</p>
   </header>
 </div>
+
 <section class="flush">
-  <div class="wrap">
-    <div class="boards">
-      <article class="board reveal"><div class="viewer"><div class="seg" role="tablist" aria-label="View"><button role="tab" id="b-obc-t0" aria-controls="b-obc-p0" aria-selected="true">3D</button><button role="tab" id="b-obc-t1" aria-controls="b-obc-p1" aria-selected="false" tabindex="-1">Top</button></div><div class="panes"><div class="pane" role="tabpanel" id="b-obc-p0" aria-labelledby="b-obc-t0"><img src="assets/img/obc_3d.jpg" alt="3D render of the Samruk-1 OBC board" loading="eager" style="--ar:4/3"></div><div class="pane" role="tabpanel" id="b-obc-p1" aria-labelledby="b-obc-t1" hidden><img src="assets/img/obc_top.jpg" alt="Top view of the Samruk-1 OBC board layout" loading="lazy" style="--ar:4/3"></div></div></div><h3>OBC — the main computer</h3><p>ESP32-S3 module, motion sensors and the connectors that tie the stack together.</p><ul class="chips"><li>ESP32-S3</li><li>IMU</li><li>stack bus</li></ul></article><article class="board reveal"><div class="viewer"><div class="seg" role="tablist" aria-label="View"><button role="tab" id="b-eps-t0" aria-controls="b-eps-p0" aria-selected="true">3D</button><button role="tab" id="b-eps-t1" aria-controls="b-eps-p1" aria-selected="false" tabindex="-1">Top</button></div><div class="panes"><div class="pane" role="tabpanel" id="b-eps-p0" aria-labelledby="b-eps-t0"><img src="assets/img/eps_3d.jpg" alt="3D render of the Samruk-1 EPS board" loading="eager" style="--ar:4/3"></div><div class="pane" role="tabpanel" id="b-eps-p1" aria-labelledby="b-eps-t1" hidden><img src="assets/img/eps_top.jpg" alt="Top view of the Samruk-1 EPS board layout" loading="lazy" style="--ar:4/3"></div></div></div><h3>EPS — power</h3><p>2S lithium pack, protection, current monitor and TPS563201 buck converters — the circuit Proofboard starts with.</p><ul class="chips"><li>2S Li-ion</li><li>TPS563201</li><li>INA219</li><li>USB-C + solar</li></ul></article><article class="board reveal"><div class="viewer"><div class="seg" role="tablist" aria-label="View"><button role="tab" id="b-gas-t0" aria-controls="b-gas-p0" aria-selected="true">3D</button><button role="tab" id="b-gas-t1" aria-controls="b-gas-p1" aria-selected="false" tabindex="-1">Top</button></div><div class="panes"><div class="pane" role="tabpanel" id="b-gas-p0" aria-labelledby="b-gas-t0"><img src="assets/img/gas_3d.jpg" alt="3D render of the Samruk-1 GAS board" loading="eager" style="--ar:4/3"></div><div class="pane" role="tabpanel" id="b-gas-p1" aria-labelledby="b-gas-t1" hidden><img src="assets/img/gas_top.jpg" alt="Top view of the Samruk-1 GAS board layout" loading="lazy" style="--ar:4/3"></div></div></div><h3>GAS — the instrument</h3><p>Three MQ gas sensors with a precision ADC for methane and air-quality readings.</p><ul class="chips"><li>MQ-4 · MQ-7 · MQ-135</li><li>ADS1115</li></ul></article><article class="board reveal"><div class="viewer"><div class="seg" role="tablist" aria-label="View"><button role="tab" id="b-comms-t0" aria-controls="b-comms-p0" aria-selected="true">3D</button><button role="tab" id="b-comms-t1" aria-controls="b-comms-p1" aria-selected="false" tabindex="-1">Top</button></div><div class="panes"><div class="pane" role="tabpanel" id="b-comms-p0" aria-labelledby="b-comms-t0"><img src="assets/img/comms_3d.jpg" alt="3D render of the Samruk-1 COMMS board" loading="eager" style="--ar:4/3"></div><div class="pane" role="tabpanel" id="b-comms-p1" aria-labelledby="b-comms-t1" hidden><img src="assets/img/comms_top.jpg" alt="Top view of the Samruk-1 COMMS board layout" loading="lazy" style="--ar:4/3"></div></div></div><h3>COMMS — radio and position</h3><p>LoRa telemetry and GPS for tracking the probe.</p><ul class="chips"><li>LoRa</li><li>GPS</li></ul></article>
+  <div class="wrap split">
+    <figure class="reveal"><div class="frame contain"><img src="assets/img/batch0_panel.png" alt="3D render of the Batch 0 panel with sixteen modules" width="1600" height="1600" style="aspect-ratio:1/1"></div>
+      <p class="cap">Batch 0 as it will be ordered: one 100 × 100 mm panel, five copies from the factory.</p></figure>
+    <div class="reveal">
+      <span class="kicker">Batch 0</span>
+      <h2 style="margin:10px 0 16px">Four references, six known defects, six AI designs.</h2>
+      <p class="muted" style="font-size:18px">The four identical references measure the bench's own noise. Each defect board changes exactly one thing from the reference, so the bench has to see that one difference. The six AI cells are DeepSeek designs: five pass every hard check, one repeats a capacitance mistake the rules catch.</p>
+      <div class="legend" style="margin-top:22px"><span><i style="background:var(--good)"></i>Reference ×4</span><span><i style="background:var(--bad)"></i>Known defect ×6</span><span><i style="background:var(--amber)"></i>AI-designed ×6</span></div>
     </div>
-    <p class="cap" style="margin-top:20px">Renders of the first (SMD) revision. Switch between the 3D view and the top-down layout.</p>
   </div>
 </section>
 
 <section>
-  <div class="wrap split">
-    <figure class="reveal"><div class="frame contain"><img src="assets/img/ref_module.png" alt="3D render of the 22 by 22 millimetre reference module" loading="lazy" width="1400" height="1050" style="aspect-ratio:4/3"></div></figure>
-    <div class="reveal">
-      <span class="kicker">The test module</span>
-      <h2 style="margin:10px 0 16px">One small board, many designs.</h2>
-      <p class="muted" style="font-size:18px">Proofboard's first exam is the power circuit from the EPS board, shrunk to a 22 × 22 mm module: a TPS563201 buck converter from a 2S battery to 3.3 V at up to 1 A. Every model designs the same module; only the decisions differ.</p>
-      <ul class="chips" style="margin:18px 0 0"><li>VIN 6.4–8.4 V</li><li>VOUT 3.3 V ± 2 %</li><li>0–1 A</li><li>22 × 22 mm</li></ul>
-    </div>
+  <div class="wrap">
+    <div class="head reveal"><span class="kicker">The six defects</span><h2>What the rules catch — and what they don't.</h2>
+      <p>Five of six known defects are stopped by datasheet rules before any board exists. One — the far input capacitors — passes every rule. That's exactly the kind of mistake only a bench can price.</p></div>
+    <div class="tablewrap reveal"><table class="defects">
+      <thead><tr><th>Cell</th><th>Change</th><th>Rules</th><th>What happened</th></tr></thead>
+      <tbody><tr><td class="mono">B0-D1</td><td><b>Low-saturation inductor</b><br><span class="muted">0.42 A saturation current on a 1 A converter.</span></td><td><span class="verdict caught">Caught</span></td><td class="muted">T2.ISAT, T2.IRMS, T2.L_RANGE. First it broke our own router — fixed the same day (see below).</td></tr><tr><td class="mono">B0-D2</td><td><b>High-resistance inductor</b><br><span class="muted">10 µH with 180 mΩ of winding resistance.</span></td><td><span class="verdict caught">Caught</span></td><td class="muted">T2.L_RANGE — outside TI's recommended 2.2–4.7 µH.</td></tr><tr><td class="mono">B0-D3</td><td><b>Capacitors that shrink</b><br><span class="muted">22 µF / 6.3 V output caps in 0603.</span></td><td><span class="verdict caught">Caught, barely</span></td><td class="muted">T2.COUT_EFF — 19.8 µF effective at 3.3 V, against a 20 µF minimum.</td></tr><tr><td class="mono">B0-D4</td><td><b>Far input capacitors</b><br><span class="muted">Same parts as the reference, moved to the corner.</span></td><td><span class="verdict pass">Passes every rule</span></td><td class="muted">Only warnings. This is the case the bench has to decide.</td></tr><tr><td class="mono">B0-D5</td><td><b>One small output cap</b><br><span class="muted">A single 4.7 µF capacitor.</span></td><td><span class="verdict caught">Caught</span></td><td class="muted">T2.COUT_EFF — 4.1 µF effective.</td></tr><tr><td class="mono">B0-D6</td><td><b>Divider on the edge</b><br><span class="muted">34 k / 10 k instead of 33.2 k / 10 k.</span></td><td><span class="verdict caught">Caught</span></td><td class="muted">T2.VOUT_NOM — 3.379 V, outside ±2 %.</td></tr></tbody>
+    </table></div>
   </div>
 </section>
 
@@ -76,6 +80,7 @@
       <h3>What the run taught us about our own harness</h3>
       <ul>
         <li>The first attempt failed for a reason that wasn't the model's: our 8,000-token answer limit cut a reasoning model off mid-thought. Truncated answers are now counted against the harness, not the model.</li>
+        <li>Four of the next six DeepSeek designs failed for our reason, not theirs: on a 22 mm board the ground pour split into islands and our router never connected them. Ground is now routed like any other net; all six designs were re-checked.</li>
         <li>Our 40 % inductor-ripple warning also fires on TI's own recommended 4.7 µH value. That threshold is our rule, not the datasheet's, and needs recalibrating — against measurements.</li>
       </ul>
     </div>
@@ -95,33 +100,12 @@
     </div>
   </div>
 </section>
-
-<section>
-  <div class="wrap split">
-    <div class="reveal">
-      <span class="kicker">Batch 0</span>
-      <h2 style="margin:10px 0 16px">Sixteen cells on one panel.</h2>
-      <p class="muted" style="font-size:18px">The first fabrication run puts sixteen isolated modules on a single 100 × 100 mm board. Four are identical references to measure the bench's own noise; six carry one known defect each; six are designed by AI models.</p>
-      <p class="muted" style="font-size:18px;margin-top:14px">If the bench can't tell the defective boards from the references, that's the answer — and it will be published.</p>
-    </div>
-    <div class="reveal">
-      <div class="cells" aria-label="Batch 0 layout: 4 reference, 6 known-defect and 6 AI-designed cells">
-        <span class="ref">REF</span><span class="def">DEF</span><span class="ai">AI</span><span class="def">DEF</span>
-        <span class="ai">AI</span><span class="ref">REF</span><span class="def">DEF</span><span class="ai">AI</span>
-        <span class="def">DEF</span><span class="ai">AI</span><span class="ref">REF</span><span class="def">DEF</span>
-        <span class="ai">AI</span><span class="def">DEF</span><span class="ai">AI</span><span class="ref">REF</span>
-      </div>
-      <div class="legend"><span><i style="background:var(--good)"></i>Reference ×4</span><span><i style="background:var(--bad)"></i>Known defect ×6</span><span><i style="background:var(--amber)"></i>AI-designed ×6</span></div>
-      <p class="cap">Planned layout, illustrative.</p>
-    </div>
-  </div>
-</section>
 </main>
 <div class="wrap"><div class="next"><a href="how.html"><small>Previous</small><span>How it works</span></a><a class="fwd" href="roadmap.html"><small>Next</small><span>Roadmap</span></a></div></div>
 <div class="wrap">
   <footer class="site">
     <span>Proofboard · Astana, Kazakhstan · Predict before you build. Measure after. Publish the score.</span>
-    <nav aria-label="Footer"><a href="index.html">Home</a><a href="how.html">How it works</a><a href="boards.html">Boards</a><a href="roadmap.html">Roadmap</a><a href="about.html">About</a></nav>
+    <nav aria-label="Footer"><a href="index.html">Home</a><a href="how.html">How it works</a><a href="boards.html">Lab</a><a href="roadmap.html">Roadmap</a><a href="about.html">About</a></nav>
   </footer>
 </div>
 <script src="assets/site.js" defer></script>

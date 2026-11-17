@@ -239,3 +239,15 @@ footer.site a:hover{color:var(--ink)}
 .lessons ul{margin:0;padding-left:20px;color:var(--soft)}
 .lessons li{margin-top:8px}
 @media (max-width:900px){.trio{grid-template-columns:1fr}}
+
+/* ---------- defects table ---------- */
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:18px;background:var(--paper)}
+table.defects{width:100%;border-collapse:collapse;font-size:15px;min-width:640px}
+.defects th{text-align:left;font:500 12.5px var(--mono);letter-spacing:.04em;text-transform:uppercase;color:var(--muted);padding:14px 18px;border-bottom:1px solid var(--line)}
+.defects td{padding:16px 18px;border-bottom:1px solid var(--line);vertical-align:top}
+.defects tr:last-child td{border-bottom:0}
+.verdict{display:inline-block;font:500 12px var(--mono);padding:4px 8px;border-radius:6px;white-space:nowrap}
+.verdict.caught{background:var(--good-soft);color:var(--good)}
+.verdict.pass{background:var(--amber-soft);color:var(--amber)}
+.verdict.tool{background:var(--bad-soft);color:var(--bad)}
+.defects td.mono{white-space:nowrap}

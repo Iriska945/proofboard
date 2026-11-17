@@ -7,7 +7,7 @@
 <meta name="description" content="Design language, Oracle and bench: how Proofboard predicts and then measures.">
 <meta property="og:title" content="How it works · Proofboard">
 <meta property="og:description" content="Design language, Oracle and bench: how Proofboard predicts and then measures.">
-<meta property="og:image" content="assets/img/sat_exploded.jpg">
+<meta property="og:image" content="assets/img/batch0_panel.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 32 32' aria-hidden='true'%3E%3Crect x='2.5' y='2.5' width='27' height='27' rx='7' fill='%231e3a5f'/%3E%3Cpath d='M8.5 21.5h6l3-11h6' stroke='%23f6ead2' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='8.5' cy='21.5' r='2.4' fill='%23e3a94e'/%3E%3Ccircle cx='23.5' cy='10.5' r='2.4' fill='%23e3a94e'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +21,7 @@
     <a class="brand" href="index.html" aria-label="Proofboard home"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2.5" y="2.5" width="27" height="27" rx="7" fill="#1e3a5f"/><path d="M8.5 21.5h6l3-11h6" stroke="#f6ead2" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8.5" cy="21.5" r="2.4" fill="#e3a94e"/><circle cx="23.5" cy="10.5" r="2.4" fill="#e3a94e"/></svg>Proofboard</a>
     <ul>
       <li><a href="how.html" aria-current="page">How it works</a></li>
-      <li><a href="boards.html">Boards</a></li>
+      <li><a href="boards.html">Lab</a></li>
       <li><a href="roadmap.html">Roadmap</a></li>
       <li><a href="about.html">About</a></li>
     </ul>
@@ -54,11 +54,15 @@
 
 <section>
   <div class="wrap">
-    <div class="head reveal"><span class="kicker">An AI agent in the loop</span><h2>The agent proposes. The checks decide.</h2>
-      <p>From the Samruk-1 work in October 2026: a local Qwen model placed a second 3.3 V converter on the power board, and KiCad checks fed every error back until the layout passed.</p></div>
+    <div class="head reveal"><span class="kicker">The feedback loop</span><h2>The model proposes. The checks decide.</h2>
+      <p>From the first real run, November 2026: DeepSeek designed the module from scratch. Its first answer broke one datasheet rule; the error went back verbatim, and the second answer passed.</p></div>
     <div class="compare">
-      <figure class="reveal"><img src="assets/img/qwen_try1.jpg" alt="First AI layout: the inductor sits far from the switch pin" loading="lazy" width="900" height="600"><div class="lbl"><span class="dot bad"></span>First attempt</div><figcaption>The inductor sits far from the SW pin — a long, noisy switching loop.</figcaption></figure>
-      <figure class="reveal"><img src="assets/img/qwen_final.jpg" alt="Final AI layout: inductor and capacitors next to their pins" loading="lazy" width="900" height="600"><div class="lbl"><span class="dot good"></span>After feedback</div><figcaption>Inductor and capacitors next to their pins, accepted by the checks.</figcaption></figure>
+      <figure class="reveal"><div class="lbl"><span class="dot bad"></span>Iteration 1 · rejected</div>
+        <ul class="findings" style="margin-top:12px"><li><span class="sev e">ERROR</span><span><code>T2.CIN_EFF</code> — Cin(eff@8.4V) = 7.00 uF &lt; min 10 uF<span class="src">one 10 µF / 25 V capacitor keeps only 7 µF at 8.4 V</span></span></li></ul>
+        <figcaption style="margin-top:12px">Ceramic capacitors lose capacitance under voltage. The model picked one input capacitor; at the battery's full charge it isn't enough.</figcaption></figure>
+      <figure class="reveal"><div class="lbl"><span class="dot good"></span>Iteration 2 · accepted</div>
+        <ul class="findings" style="margin-top:12px"><li><span class="sev w">WARN</span><span><code>T2.LOOP_IN</code> — input cap loop 9.11 mm &gt; 3 mm (VIN leg 6.46 mm, GND leg 9.11 mm)</span></li></ul>
+        <figcaption style="margin-top:12px">A second capacitor fixes the rule. The layout still carries a warning that no rule can settle — that's what Batch 0 measures.</figcaption></figure>
     </div>
   </div>
 </section>
@@ -95,11 +99,11 @@
   </div>
 </section>
 </main>
-<div class="wrap"><div class="next"><a href="index.html"><small>Previous</small><span>Home</span></a><a class="fwd" href="boards.html"><small>Next</small><span>Boards</span></a></div></div>
+<div class="wrap"><div class="next"><a href="index.html"><small>Previous</small><span>Home</span></a><a class="fwd" href="boards.html"><small>Next</small><span>Lab</span></a></div></div>
 <div class="wrap">
   <footer class="site">
     <span>Proofboard · Astana, Kazakhstan · Predict before you build. Measure after. Publish the score.</span>
-    <nav aria-label="Footer"><a href="index.html">Home</a><a href="how.html">How it works</a><a href="boards.html">Boards</a><a href="roadmap.html">Roadmap</a><a href="about.html">About</a></nav>
+    <nav aria-label="Footer"><a href="index.html">Home</a><a href="how.html">How it works</a><a href="boards.html">Lab</a><a href="roadmap.html">Roadmap</a><a href="about.html">About</a></nav>
   </footer>
 </div>
 <script src="assets/site.js" defer></script>

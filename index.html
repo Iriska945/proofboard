@@ -7,7 +7,7 @@
 <meta name="description" content="Know how an AI-designed circuit board will behave before you build it.">
 <meta property="og:title" content="Proofboard">
 <meta property="og:description" content="Know how an AI-designed circuit board will behave before you build it.">
-<meta property="og:image" content="assets/img/sat_exploded.jpg">
+<meta property="og:image" content="assets/img/batch0_panel.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 32 32' aria-hidden='true'%3E%3Crect x='2.5' y='2.5' width='27' height='27' rx='7' fill='%231e3a5f'/%3E%3Cpath d='M8.5 21.5h6l3-11h6' stroke='%23f6ead2' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='8.5' cy='21.5' r='2.4' fill='%23e3a94e'/%3E%3Ccircle cx='23.5' cy='10.5' r='2.4' fill='%23e3a94e'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +21,7 @@
     <a class="brand" href="index.html" aria-label="Proofboard home"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2.5" y="2.5" width="27" height="27" rx="7" fill="#1e3a5f"/><path d="M8.5 21.5h6l3-11h6" stroke="#f6ead2" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8.5" cy="21.5" r="2.4" fill="#e3a94e"/><circle cx="23.5" cy="10.5" r="2.4" fill="#e3a94e"/></svg>Proofboard</a>
     <ul>
       <li><a href="how.html">How it works</a></li>
-      <li><a href="boards.html">Boards</a></li>
+      <li><a href="boards.html">Lab</a></li>
       <li><a href="roadmap.html">Roadmap</a></li>
       <li><a href="about.html">About</a></li>
     </ul>
@@ -41,8 +41,8 @@
       </div>
     </div>
     <figure>
-      <div class="frame"><img src="assets/img/samruk_stack.jpg" alt="3D render of the Samruk-1 board stack inside its CubeSat frame" width="1089" height="1400" style="aspect-ratio:4/5;max-height:600px">
-        <div class="tag"><b>SAMRUK-1</b>Four boards for an atmospheric probe, designed in KiCad with an AI agent in the loop.</div></div>
+      <div class="frame contain"><img src="assets/img/batch0_panel.png" alt="3D render of the Batch 0 panel: sixteen 22 mm modules on one 100 mm board" width="1600" height="1600" style="aspect-ratio:1/1;max-height:600px">
+        <div class="tag"><b>BATCH 0 · PLANNED</b>Sixteen designs on one panel: references, known defects and boards designed by AI.</div></div>
     </figure>
   </header>
 </div>
@@ -56,7 +56,7 @@
       <p class="muted" style="font-size:18px;margin-top:14px">In November 2026 Anthropic, working with Diode, named measurements on finished devices as the next step for Claude's electronics work. An open, independent version doesn't exist yet.</p>
     </div>
     <div class="reveal">
-      <div class="viewer"><div class="seg" role="tablist" aria-label="View"><button role="tab" id="enc-t0" aria-controls="enc-p0" aria-selected="true">Assembled</button><button role="tab" id="enc-t1" aria-controls="enc-p1" aria-selected="false" tabindex="-1">Open</button><button role="tab" id="enc-t2" aria-controls="enc-p2" aria-selected="false" tabindex="-1">Top</button></div><div class="panes"><div class="pane" role="tabpanel" id="enc-p0" aria-labelledby="enc-t0"><img src="assets/img/sat_closed_iso.jpg" alt="Samruk-1 CubeSat body, assembled, with solar panels and green frame rails" loading="eager" style="--ar:1/1"></div><div class="pane" role="tabpanel" id="enc-p1" aria-labelledby="enc-t1" hidden><img src="assets/img/sat_exploded.jpg" alt="Samruk-1 with one solar wall removed, showing the board stack inside" loading="lazy" style="--ar:1/1"></div><div class="pane" role="tabpanel" id="enc-p2" aria-labelledby="enc-t2" hidden><img src="assets/img/sat_top.jpg" alt="Samruk-1 seen from above" loading="lazy" style="--ar:1/1"></div></div><p class="cap">Samruk-1, current enclosure revision: assembled, opened up, and from above.</p></div>
+      <div class="viewer"><div class="seg" role="tablist" aria-label="View"><button role="tab" id="cmp-t0" aria-controls="cmp-p0" aria-selected="true">Reference</button><button role="tab" id="cmp-t1" aria-controls="cmp-p1" aria-selected="false" tabindex="-1">DeepSeek, from scratch</button></div><div class="panes"><div class="pane" role="tabpanel" id="cmp-p0" aria-labelledby="cmp-t0"><img src="assets/img/top_reference.png" alt="Top view of the hand-placed reference module" loading="eager" style="--ar:1/1"></div><div class="pane" role="tabpanel" id="cmp-p1" aria-labelledby="cmp-t1" hidden><img src="assets/img/top_ai_L3.png" alt="Top view of the module DeepSeek designed from scratch" loading="lazy" style="--ar:1/1"></div></div><p class="cap">Same circuit, same rules, both pass. DeepSeek put the input capacitors 9.1 mm from the chip; the reference, 4.8 mm. Only a bench can say whether that matters.</p></div>
     </div>
   </div>
 </section>
@@ -101,7 +101,7 @@
 <div class="wrap">
   <footer class="site">
     <span>Proofboard · Astana, Kazakhstan · Predict before you build. Measure after. Publish the score.</span>
-    <nav aria-label="Footer"><a href="index.html">Home</a><a href="how.html">How it works</a><a href="boards.html">Boards</a><a href="roadmap.html">Roadmap</a><a href="about.html">About</a></nav>
+    <nav aria-label="Footer"><a href="index.html">Home</a><a href="how.html">How it works</a><a href="boards.html">Lab</a><a href="roadmap.html">Roadmap</a><a href="about.html">About</a></nav>
   </footer>
 </div>
 <script src="assets/site.js" defer></script>
