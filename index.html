@@ -4,219 +4,106 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Proofboard</title>
-<meta name="description" content="Proofboard predicts how an AI-designed circuit board will behave before it is built, then measures the real board and publishes how often the prediction was right.">
-<meta property="og:title" content="Proofboard — ground truth for AI-designed electronics">
-<meta property="og:description" content="Predict before you build. Measure after. Publish the score.">
-<meta property="og:image" content="assets/board_3d.png">
+<meta name="description" content="Know how an AI-designed circuit board will behave before you build it.">
+<meta property="og:title" content="Proofboard">
+<meta property="og:description" content="Know how an AI-designed circuit board will behave before you build it.">
+<meta property="og:image" content="assets/img/enc_exploded.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 32 32' aria-hidden='true'%3E%3Crect x='2.5' y='2.5' width='27' height='27' rx='7' fill='%231e3a5f'/%3E%3Cpath d='M8.5 21.5h6l3-11h6' stroke='%23f6ead2' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='8.5' cy='21.5' r='2.4' fill='%23e3a94e'/%3E%3Ccircle cx='23.5' cy='10.5' r='2.4' fill='%23e3a94e'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root{
-  --bg:#f7f7f4; --surface:#ffffff; --ink:#15171a; --muted:#5d636b; --line:#e3e3dc;
-  --accent:#1f7a4d; --accent-soft:#e3f1e9; --warn:#a15c07; --warn-soft:#fbefdc; --bad:#b3261e;
-  --pcb:#24331f;
-}
-@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
-  --bg:#0f1112; --surface:#171a1c; --ink:#eceeef; --muted:#9aa1a8; --line:#2a2f33;
-  --accent:#4cc38a; --accent-soft:#16301f; --warn:#e3a04a; --warn-soft:#33240f; --bad:#f07a72;
-}}
-:root[data-theme="dark"]{
-  --bg:#0f1112; --surface:#171a1c; --ink:#eceeef; --muted:#9aa1a8; --line:#2a2f33;
-  --accent:#4cc38a; --accent-soft:#16301f; --warn:#e3a04a; --warn-soft:#33240f; --bad:#f07a72;
-}
-*{box-sizing:border-box}
-html,body{margin:0}
-body{background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,-apple-system,Segoe UI,sans-serif;-webkit-font-smoothing:antialiased}
-a{color:var(--accent)}
-.wrap{max-width:1080px;margin:0 auto;padding:0 16px}
-header.top{display:flex;align-items:center;justify-content:space-between;padding:20px 0}
-.logo{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.01em;font-size:18px}
-.logo svg{width:26px;height:26px}
-.top nav a{color:var(--muted);text-decoration:none;margin-left:20px;font-size:14px}
-.top nav a:hover{color:var(--ink)}
-.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding:48px 0 64px}
-.eyebrow{display:inline-block;font:500 12px/1 "JetBrains Mono",monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:7px 10px;border-radius:999px}
-h1{font-size:clamp(34px,5vw,54px);line-height:1.05;letter-spacing:-.03em;margin:18px 0 18px}
-.lede{font-size:19px;color:var(--muted);max-width:34em;margin:0 0 28px}
-.cta{display:flex;gap:12px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:10px;font-weight:600;font-size:15px;text-decoration:none;border:1px solid var(--line);color:var(--ink);background:var(--surface)}
-.btn.primary{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.hero img{width:100%;border-radius:18px;display:block;box-shadow:0 30px 60px -30px rgba(0,0,0,.45);background:#000}
-.caption{font-size:13px;color:var(--muted);margin-top:10px}
-section{padding:64px 0;border-top:1px solid var(--line)}
-h2{font-size:clamp(26px,3.4vw,36px);letter-spacing:-.02em;line-height:1.15;margin:0 0 14px}
-.sub{color:var(--muted);max-width:44em;margin:0 0 36px;font-size:17px}
-.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px}
-.card .n{font:500 13px "JetBrains Mono",monospace;color:var(--accent)}
-.card h3{margin:8px 0 8px;font-size:19px;letter-spacing:-.01em}
-.card p{margin:0;color:var(--muted);font-size:15px}
-.problem{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-.quote{font-size:21px;line-height:1.45;letter-spacing:-.01em}
-.oracle{display:grid;grid-template-columns:1fr 1.1fr;gap:28px;align-items:start}
-.ui{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;font-size:14px}
-.ui-head{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--line)}
-.mono{font-family:"JetBrains Mono",monospace;font-size:12.5px}
-.pill{font:500 11px "JetBrains Mono",monospace;padding:4px 8px;border-radius:999px;background:var(--warn-soft);color:var(--warn);text-transform:uppercase;letter-spacing:.06em}
-.ui table{width:100%;border-collapse:collapse}
-.ui th,.ui td{text-align:left;padding:11px 18px;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
-.ui th{font-weight:500;color:var(--muted);font-size:12.5px}
-.ui tr:last-child td{border-bottom:0}
-.band{position:relative;height:8px;background:var(--line);border-radius:4px;min-width:120px}
-.band i{position:absolute;top:0;bottom:0;background:var(--accent-soft);border:1px solid var(--accent);border-radius:4px}
-.band b{position:absolute;top:-4px;width:3px;height:16px;background:var(--ink);border-radius:2px}
-.hit{color:var(--accent);font-weight:600}.miss{color:var(--bad);font-weight:600}
-.ui-foot{padding:12px 18px;color:var(--muted);font-size:12.5px;background:var(--bg)}
-.flags{list-style:none;padding:0;margin:14px 0 0}
-.flags li{padding:10px 0;border-top:1px solid var(--line);display:flex;gap:10px;font-size:15px}
-.flags li:first-child{border-top:0}
-.sev{font:500 11px "JetBrains Mono",monospace;padding:3px 7px;border-radius:6px;height:fit-content;white-space:nowrap}
-.sev.e{background:#fde7e5;color:var(--bad)}.sev.w{background:var(--warn-soft);color:var(--warn)}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .sev.e{background:#3a1715}}
-.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.stat{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px}
-.stat .v{font-size:34px;font-weight:700;letter-spacing:-.02em}
-.stat .l{color:var(--muted);font-size:14px}
-.timeline{list-style:none;margin:0;padding:0;display:grid;gap:12px}
-.timeline li{display:grid;grid-template-columns:150px 1fr;gap:18px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 20px}
-.timeline .when{font:500 13px "JetBrains Mono",monospace;color:var(--muted)}
-.timeline .done{color:var(--accent)}
-.who{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-footer{padding:40px 0 60px;border-top:1px solid var(--line);color:var(--muted);font-size:14px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
-@media (max-width:860px){
-  .hero,.oracle,.problem{grid-template-columns:1fr}
-  .grid3,.who{grid-template-columns:1fr}
-  .stats{grid-template-columns:1fr 1fr}
-  .timeline li{grid-template-columns:1fr;gap:4px}
-  .top nav{display:none}
-  .ui th:nth-child(3),.ui td:nth-child(3){display:none}
-}
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+<a class="skip" href="#main">Skip to content</a>
 <div class="wrap">
-  <header class="top">
-    <div class="logo">
-      <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="3" y="3" width="26" height="26" rx="6" fill="var(--pcb)"/><path d="M9 21h6l3-10h5" stroke="#cfe8b7" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9" cy="21" r="2.2" fill="#e6c27a"/><circle cx="23" cy="11" r="2.2" fill="#e6c27a"/></svg>
-      Proofboard
-    </div>
-    <nav><a href="#how">How it works</a><a href="#status">Status</a><a href="#roadmap">Roadmap</a></nav>
-  </header>
+  <nav class="nav" aria-label="Main">
+    <a class="brand" href="index.html" aria-label="Proofboard home"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2.5" y="2.5" width="27" height="27" rx="7" fill="#1e3a5f"/><path d="M8.5 21.5h6l3-11h6" stroke="#f6ead2" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8.5" cy="21.5" r="2.4" fill="#e3a94e"/><circle cx="23.5" cy="10.5" r="2.4" fill="#e3a94e"/></svg>Proofboard</a>
+    <ul>
+      <li><a href="how.html">How it works</a></li>
+      <li><a href="boards.html">Boards</a></li>
+      <li><a href="roadmap.html">Roadmap</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+</div>
+<main id="main">
 
-  <div class="hero">
+<div class="wrap">
+  <header class="hero">
     <div>
-      <span class="eyebrow">Ground truth for AI-designed electronics</span>
+      <span class="kicker">Ground truth for AI-designed electronics</span>
       <h1>Know how the board will behave before you build it.</h1>
-      <p class="lede">AI can now design circuit boards. Nobody can tell whether a design works until it is manufactured, soldered and measured — two weeks and real money later. Proofboard predicts the measurements in advance, then builds the board, measures it, and publishes how often the prediction was right.</p>
-      <div class="cta">
-        <a class="btn primary" href="#how">How it works</a>
-        <a class="btn" href="#roadmap">Roadmap</a>
+      <p class="lede">AI can now design circuit boards. But you only learn whether a design works after it is manufactured, soldered and measured — weeks later. Proofboard predicts the measurements first, then builds the board, measures it, and publishes how often the prediction was right.</p>
+      <div class="actions">
+        <a class="btn primary" href="how.html">See how it works <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn ghost" href="about.html">Why I'm building it</a>
       </div>
     </div>
-    <div>
-      <img src="assets/board_3d.png" alt="3D render of the 22 by 22 millimetre reference buck-converter module generated by the Proofboard harness">
-      <div class="caption">The reference module, generated end-to-end by our harness: 22 × 22 mm, 3.3 V buck converter on a TI TPS563201. DRC 0 errors, ERC 0 errors.</div>
-    </div>
-  </div>
+    <figure>
+      <div class="frame"><img src="assets/img/samruk_stack.jpg" alt="3D render of the Samruk-1 board stack inside its CubeSat frame" width="1089" height="1400" style="aspect-ratio:4/5;max-height:600px">
+        <div class="tag"><b>SAMRUK-1</b>Four boards for an atmospheric probe, designed in KiCad with an AI agent in the loop.</div></div>
+    </figure>
+  </header>
 </div>
 
 <section>
-  <div class="wrap problem">
-    <div>
-      <h2>Software has a compiler. Hardware has a two-week wait.</h2>
-      <p class="sub">Language models got good at code because code can be checked in seconds. Circuit boards can't: today's checks only ask whether the rules are broken, not what the instruments will read. That missing signal is what slows AI hardware design down.</p>
+  <div class="wrap split">
+    <div class="reveal">
+      <span class="kicker">The problem</span>
+      <h2 style="margin:10px 0 16px">Software has a compiler. Hardware has a two-week wait.</h2>
+      <p class="muted" style="font-size:18px">Language models got good at code because code can be checked in seconds. Circuit boards can't: today's checks only ask whether the rules are broken, not what the instruments will read.</p>
+      <p class="muted" style="font-size:18px;margin-top:14px">In November 2026 Anthropic, working with Diode, named measurements on finished devices as the next step for Claude's electronics work. An open, independent version doesn't exist yet.</p>
     </div>
-    <div class="card">
-      <p class="quote">“Next, we plan to … learn from measurements taken on the finished devices.”</p>
-      <p style="margin-top:12px">— Anthropic, on Claude designing electronics with Diode, November 2026. Measurement is the acknowledged next step; nobody publishes an open, independent version of it yet.</p>
-    </div>
-  </div>
-</section>
-
-<section id="how">
-  <div class="wrap">
-    <h2>Three parts, one loop</h2>
-    <p class="sub">We focus on a few functions and make them rigorous, starting with one well-understood circuit: a 3.3 V buck converter.</p>
-    <div class="grid3">
-      <div class="card"><div class="n">01 · Design language</div><h3>Real parts, not adjectives</h3><p>A design names exact catalogue parts with datasheet parameters — not “22 µF”. Every value carries its source page, so any design can be bought, built and simulated unambiguously.</p></div>
-      <div class="card"><div class="n">02 · Oracle</div><h3>Predict, then commit</h3><p>Before manufacturing, the Oracle predicts output voltage, efficiency, ripple and temperature with intervals. Each prediction is hashed and committed to git before the board is ordered, so it can't be adjusted afterwards.</p></div>
-      <div class="card"><div class="n">03 · Bench</div><h3>Measure, then score</h3><p>An automated test bench measures the real board in the same format. Every board makes the Oracle more accurate, and every miss is published.</p></div>
+    <div class="reveal">
+      <div class="viewer"><div class="seg" role="tablist" aria-label="View"><button role="tab" id="enc-t0" aria-controls="enc-p0" aria-selected="true">Assembled</button><button role="tab" id="enc-t1" aria-controls="enc-p1" aria-selected="false" tabindex="-1">Cutaway</button><button role="tab" id="enc-t2" aria-controls="enc-p2" aria-selected="false" tabindex="-1">Exploded</button></div><div class="panes"><div class="pane" role="tabpanel" id="enc-p0" aria-labelledby="enc-t0"><img src="assets/img/enc_assembled.jpg" alt="Samruk-1 enclosure, assembled" loading="eager" style="--ar:1500/1150"></div><div class="pane" role="tabpanel" id="enc-p1" aria-labelledby="enc-t1" hidden><img src="assets/img/enc_cutaway.jpg" alt="Samruk-1 enclosure in cutaway, boards visible inside" loading="lazy" style="--ar:1500/1150"></div><div class="pane" role="tabpanel" id="enc-p2" aria-labelledby="enc-t2" hidden><img src="assets/img/enc_exploded.jpg" alt="Samruk-1 enclosure exploded into walls and board stack" loading="lazy" style="--ar:1500/1150"></div></div><p class="cap">Samruk-1 enclosure: assembled, cut away and exploded.</p></div>
     </div>
   </div>
 </section>
 
 <section>
-  <div class="wrap oracle">
-    <div>
-      <h2>What a result looks like</h2>
-      <p class="sub" style="margin-bottom:18px">Each design gets two layers of feedback: rule findings with their datasheet source, and a prediction that is later scored against the bench.</p>
-      <ul class="flags">
-        <li><span class="sev e">ERROR</span><span><b>T2.ISAT</b> — Isat 0.42 A &lt; peak current 1.254 A <span class="mono">source: bourns_srn2012t.pdf, p.1</span></span></li>
-        <li><span class="sev e">ERROR</span><span><b>T2.L_RANGE</b> — L = 6.8 uH outside recommended 2.2-4.7 uH <span class="mono">source: tps563201.pdf, Table 7-2</span></span></li>
-        <li><span class="sev w">WARN</span><span><b>T2.LOOP_IN</b> — input cap loop 4.80 mm &gt; 3 mm (VIN leg 2.15 mm, GND leg 4.80 mm)</span></li>
-      </ul>
-      <p class="caption" style="margin-top:14px">Real output of the current checker on the reference design with a deliberately undersized inductor swapped in.</p>
-    </div>
-    <div class="ui" role="figure" aria-label="Illustrative Oracle report">
-      <div class="ui-head"><span class="mono">design 7f3a…c21 · oracle v0</span><span class="pill">concept · numbers illustrative</span></div>
-      <table>
-        <thead><tr><th>Operating point</th><th>Predicted</th><th>Interval vs measured</th><th>Result</th></tr></thead>
-        <tbody>
-          <tr><td>Efficiency, 7.4 V · 0.5 A</td><td>88.1 %</td><td><div class="band"><i style="left:30%;width:38%"></i><b style="left:52%"></b></div></td><td class="hit">hit</td></tr>
-          <tr><td>Efficiency, 8.4 V · 1.0 A</td><td>85.4 %</td><td><div class="band"><i style="left:34%;width:32%"></i><b style="left:72%"></b></div></td><td class="miss">miss</td></tr>
-          <tr><td>VOUT, 6.4 V · 1.0 A</td><td>3.312 V</td><td><div class="band"><i style="left:22%;width:50%"></i><b style="left:44%"></b></div></td><td class="hit">hit</td></tr>
-          <tr><td>Ripple, 8.4 V · 1.0 A</td><td>18 mV</td><td><div class="band"><i style="left:18%;width:44%"></i><b style="left:40%"></b></div></td><td class="hit">hit</td></tr>
-        </tbody>
-      </table>
-      <div class="ui-foot">Prediction committed before the board was ordered · bar = predicted interval · tick = bench measurement</div>
+  <div class="wrap">
+    <div class="head reveal"><span class="kicker">How it works</span><h2>Three parts, one loop.</h2>
+      <p>We start with one well-understood circuit — a 3.3 V buck converter — and make each part rigorous before adding more.</p></div>
+    <div class="steps">
+      <div class="step reveal"><div class="num">1</div><h3>Real parts, not adjectives</h3><p>Every part is an exact catalogue part with datasheet parameters and a source page.</p><a class="more" href="how.html#language">Design language <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      <div class="step reveal"><div class="num">2</div><h3>Predict, then commit</h3><p>The Oracle predicts voltage, efficiency, ripple and temperature, and commits the prediction before the board is ordered.</p><a class="more" href="how.html#oracle">The Oracle <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+      <div class="step reveal"><div class="num">3</div><h3>Measure, then score</h3><p>A bench measures the real board in the same format and every hit and miss is published.</p><a class="more" href="how.html#bench">The bench <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
     </div>
   </div>
 </section>
 
-<section id="status">
+<section>
   <div class="wrap">
-    <h2>Where we are, honestly</h2>
-    <p class="sub">No board has been measured yet. This is what exists today.</p>
+    <div class="head reveal"><span class="kicker">Where it stands</span><h2>Honest status, November 2026.</h2><p>No board has been measured yet. This is what exists today.</p></div>
     <div class="stats">
-      <div class="stat"><div class="v">31</div><div class="l">deliberately broken designs, each caught by the expected rule</div></div>
-      <div class="stat"><div class="v">17</div><div class="l">catalogue parts, every number tied to a datasheet page</div></div>
-      <div class="stat"><div class="v">14</div><div class="l">engineering rules from the TI datasheet, all enabled</div></div>
-      <div class="stat"><div class="v">3</div><div class="l">difficulty levels for models: values, layout, full design</div></div>
+      <div class="stat reveal"><div class="v">31</div><div class="l">deliberately broken designs, each caught by the expected rule</div></div>
+      <div class="stat reveal"><div class="v">17</div><div class="l">catalogue parts, every number tied to a datasheet page</div></div>
+      <div class="stat reveal"><div class="v">14</div><div class="l">engineering rules from the TI datasheet, all enabled</div></div>
+      <div class="stat reveal"><div class="v">0</div><div class="l">DRC and ERC errors on the generated reference board</div></div>
     </div>
+    <p style="margin-top:28px"><a class="more" href="roadmap.html">See the roadmap <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
   </div>
 </section>
-
-<section id="roadmap">
-  <div class="wrap">
-    <h2>Roadmap</h2>
-    <p class="sub">The cheapest test of the whole idea comes first: if the bench can't tell a deliberately bad board from a good one, we rethink.</p>
-    <ol class="timeline">
-      <li><span class="when done">Nov 2026 · done</span><span>Design language, parts catalogue with sources, rule checker, KiCad generation with DRC/ERC, first model runs.</span></li>
-      <li><span class="when">Dec 2026</span><span>Oracle v0 and the prediction ledger. Batch 0: one 100 × 100 mm panel with 16 isolated cells — 4 references, 6 boards with one known defect each, 6 AI designs.</span></li>
-      <li><span class="when">Jan 2027</span><span>Bench v0 and the first measured results, published with every hit and miss.</span></li>
-      <li><span class="when">Q1 2027</span><span>Open dataset of “design → measurement” pairs; pilots with teams that build or evaluate AI hardware-design tools.</span></li>
-    </ol>
-  </div>
-</section>
-
-<section>
-  <div class="wrap">
-    <h2>Who it's for</h2>
-    <p class="sub">Anyone who needs to trust an AI-designed board before paying for it.</p>
-    <div class="who">
-      <div class="card"><h3>AI labs</h3><p>An independent exam for hardware design, scored by instruments rather than by rules.</p></div>
-      <div class="card"><h3>AI-for-PCB tools</h3><p>Third-party evidence of first-pass success to show customers.</p></div>
-      <div class="card"><h3>Hardware teams</h3><p>A prediction of how a board will perform, before two weeks and a fabrication order are spent.</p></div>
+<div class="wrap"><div class="ask reveal">
+    <div>
+      <h2>I'm looking for people to build this with.</h2>
+      <p>If any of this is you, write to me on LinkedIn — <b>Ramil Murat</b>. Code is available to partners on request.</p>
     </div>
-  </div>
-</section>
-
+    <ul>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>A mentor in power electronics</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Teams building or evaluating AI tools for PCB design</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Labs or schools with bench equipment to share</li>
+    </ul>
+  </div></div>
+</main>
+<div class="wrap"><div class="next"><a class="fwd" href="how.html"><small>Next</small><span>How it works</span></a></div></div>
 <div class="wrap">
-  <footer>
-    <span>Proofboard · built in Astana, Kazakhstan by Ramil Murat</span>
-    <span>Looking for mentors, partners and pilot users · code available to partners on request</span>
+  <footer class="site">
+    <span>Proofboard · Astana, Kazakhstan · Predict before you build. Measure after. Publish the score.</span>
+    <nav aria-label="Footer"><a href="index.html">Home</a><a href="how.html">How it works</a><a href="boards.html">Boards</a><a href="roadmap.html">Roadmap</a><a href="about.html">About</a></nav>
   </footer>
 </div>
+<script src="assets/site.js" defer></script>
 </body>
 </html>

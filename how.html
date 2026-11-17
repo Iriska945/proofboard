@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How it works · Proofboard</title>
+<meta name="description" content="Design language, Oracle and bench: how Proofboard predicts and then measures.">
+<meta property="og:title" content="How it works · Proofboard">
+<meta property="og:description" content="Design language, Oracle and bench: how Proofboard predicts and then measures.">
+<meta property="og:image" content="assets/img/enc_exploded.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 32 32' aria-hidden='true'%3E%3Crect x='2.5' y='2.5' width='27' height='27' rx='7' fill='%231e3a5f'/%3E%3Cpath d='M8.5 21.5h6l3-11h6' stroke='%23f6ead2' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='8.5' cy='21.5' r='2.4' fill='%23e3a94e'/%3E%3Ccircle cx='23.5' cy='10.5' r='2.4' fill='%23e3a94e'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+  <nav class="nav" aria-label="Main">
+    <a class="brand" href="index.html" aria-label="Proofboard home"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2.5" y="2.5" width="27" height="27" rx="7" fill="#1e3a5f"/><path d="M8.5 21.5h6l3-11h6" stroke="#f6ead2" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8.5" cy="21.5" r="2.4" fill="#e3a94e"/><circle cx="23.5" cy="10.5" r="2.4" fill="#e3a94e"/></svg>Proofboard</a>
+    <ul>
+      <li><a href="how.html" aria-current="page">How it works</a></li>
+      <li><a href="boards.html">Boards</a></li>
+      <li><a href="roadmap.html">Roadmap</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+</div>
+<main id="main">
+
+<div class="wrap">
+  <header class="pagehead">
+    <span class="kicker">How it works</span>
+    <h1>Predict before you build. Measure after. Publish the score.</h1>
+    <p class="lede">Three parts that feed each other. Each one is narrow on purpose: one circuit type, one board format, one bench.</p>
+  </header>
+</div>
+
+<section id="language" class="flush">
+  <div class="wrap split">
+    <div class="reveal">
+      <span class="kicker">01 · Design language</span>
+      <h2 style="margin:10px 0 16px">Real parts, not adjectives.</h2>
+      <p class="muted" style="font-size:18px">A model doesn't answer “22 µF”. It names an exact catalogue part — capacitance under DC bias, voltage rating, inductor saturation current — each tied to a datasheet page. Parts are recognised by what they connect to, not by their names, so renaming R8 to R1 changes nothing.</p>
+    </div>
+    <div class="reveal"><ul class="findings">
+        <li><span class="sev e">ERROR</span><span><code>T2.ISAT</code> — Isat 0.42 A &lt; peak current 1.254 A<span class="src">bourns_srn2012t.pdf, p.1</span></span></li>
+        <li><span class="sev e">ERROR</span><span><code>T2.L_RANGE</code> — L = 6.8 uH outside recommended 2.2-4.7 uH<span class="src">tps563201.pdf, Table 7-2</span></span></li>
+        <li><span class="sev w">WARN</span><span><code>T2.LOOP_IN</code> — input cap loop 4.80 mm &gt; 3 mm (VIN leg 2.15 mm, GND leg 4.80 mm)</span></li>
+      </ul><p class="cap">Real checker output: the reference design with a deliberately undersized inductor swapped in.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="head reveal"><span class="kicker">An AI agent in the loop</span><h2>The agent proposes. The checks decide.</h2>
+      <p>From the Samruk-1 work in October 2026: a local Qwen model placed a second 3.3 V converter on the power board, and KiCad checks fed every error back until the layout passed.</p></div>
+    <div class="compare">
+      <figure class="reveal"><img src="assets/img/qwen_try1.jpg" alt="First AI layout: the inductor sits far from the switch pin" loading="lazy" width="900" height="600"><div class="lbl"><span class="dot bad"></span>First attempt</div><figcaption>The inductor sits far from the SW pin — a long, noisy switching loop.</figcaption></figure>
+      <figure class="reveal"><img src="assets/img/qwen_final.jpg" alt="Final AI layout: inductor and capacitors next to their pins" loading="lazy" width="900" height="600"><div class="lbl"><span class="dot good"></span>After feedback</div><figcaption>Inductor and capacitors next to their pins, accepted by the checks.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="oracle">
+  <div class="wrap split">
+    <div class="reveal">
+      <span class="kicker">02 · Oracle</span>
+      <h2 style="margin:10px 0 16px">Predict, then commit.</h2>
+      <p class="muted" style="font-size:18px">Before manufacturing, the Oracle predicts output voltage, efficiency, ripple and temperature at nine operating points, each with an interval. The prediction is hashed and committed to git before the board is ordered, so it can't be adjusted afterwards.</p>
+      <p class="muted" style="font-size:18px;margin-top:14px">Version 0 is datasheet physics. What's new is the public score against real measurements, and learning from every miss.</p>
+    </div>
+    <div class="reveal"><div class="report" role="figure" aria-label="Concept of an Oracle report with illustrative numbers">
+      <header><span>design 7f3a…c21 · oracle v0</span><span class="pill">Concept · numbers illustrative</span></header>
+      <div class="row th"><span>Operating point</span><span>Predicted</span><span class="bandcell">Interval · measured</span><span>Result</span></div>
+      <div class="row"><span>Efficiency, 7.4 V · 0.5 A</span><span>88.1 %</span><span class="bandcell"><span class="band"><i style="left:30%;width:38%"></i><b style="left:52%"></b></span></span><span class="hit">hit</span></div>
+      <div class="row"><span>Efficiency, 8.4 V · 1 A</span><span>85.4 %</span><span class="bandcell"><span class="band"><i style="left:34%;width:32%"></i><b style="left:72%"></b></span></span><span class="miss">miss</span></div>
+      <div class="row"><span>Output, 6.4 V · 1 A</span><span>3.312 V</span><span class="bandcell"><span class="band"><i style="left:22%;width:50%"></i><b style="left:44%"></b></span></span><span class="hit">hit</span></div>
+      <div class="row"><span>Ripple, 8.4 V · 1 A</span><span>18 mV</span><span class="bandcell"><span class="band"><i style="left:18%;width:44%"></i><b style="left:40%"></b></span></span><span class="hit">hit</span></div>
+      <footer>Bar = predicted interval · tick = bench measurement · committed before the board was ordered</footer>
+    </div></div>
+  </div>
+</section>
+
+<section id="bench">
+  <div class="wrap split">
+    <div class="reveal">
+      <span class="kicker">03 · Bench</span>
+      <h2 style="margin:10px 0 16px">Measure, then score.</h2>
+      <p class="muted" style="font-size:18px">Every module has the same 22 × 22 mm outline and the same connector, so any design drops into one fixture. The next revision adds separate sense contacts, so connector resistance stays out of the voltage reading. The bench returns measurements in exactly the Oracle's format.</p>
+    </div>
+    <figure class="reveal"><div class="frame contain"><img src="assets/img/ref_module.png" alt="3D render of the 22 by 22 millimetre reference module" loading="lazy" width="1400" height="1050" style="aspect-ratio:4/3"></div>
+      <p class="cap">The reference module, generated end-to-end by the harness. DRC 0 errors, ERC 0 errors.</p></figure>
+  </div>
+</section>
+</main>
+<div class="wrap"><div class="next"><a href="index.html"><small>Previous</small><span>Home</span></a><a class="fwd" href="boards.html"><small>Next</small><span>Boards</span></a></div></div>
+<div class="wrap">
+  <footer class="site">
+    <span>Proofboard · Astana, Kazakhstan · Predict before you build. Measure after. Publish the score.</span>
+    <nav aria-label="Footer"><a href="index.html">Home</a><a href="how.html">How it works</a><a href="boards.html">Boards</a><a href="roadmap.html">Roadmap</a><a href="about.html">About</a></nav>
+  </footer>
+</div>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

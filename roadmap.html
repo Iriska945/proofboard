@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roadmap · Proofboard</title>
+<meta name="description" content="Honest status and the plan for the first measured batch.">
+<meta property="og:title" content="Roadmap · Proofboard">
+<meta property="og:description" content="Honest status and the plan for the first measured batch.">
+<meta property="og:image" content="assets/img/enc_exploded.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 32 32' aria-hidden='true'%3E%3Crect x='2.5' y='2.5' width='27' height='27' rx='7' fill='%231e3a5f'/%3E%3Cpath d='M8.5 21.5h6l3-11h6' stroke='%23f6ead2' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='8.5' cy='21.5' r='2.4' fill='%23e3a94e'/%3E%3Ccircle cx='23.5' cy='10.5' r='2.4' fill='%23e3a94e'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+  <nav class="nav" aria-label="Main">
+    <a class="brand" href="index.html" aria-label="Proofboard home"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2.5" y="2.5" width="27" height="27" rx="7" fill="#1e3a5f"/><path d="M8.5 21.5h6l3-11h6" stroke="#f6ead2" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8.5" cy="21.5" r="2.4" fill="#e3a94e"/><circle cx="23.5" cy="10.5" r="2.4" fill="#e3a94e"/></svg>Proofboard</a>
+    <ul>
+      <li><a href="how.html">How it works</a></li>
+      <li><a href="boards.html">Boards</a></li>
+      <li><a href="roadmap.html" aria-current="page">Roadmap</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+</div>
+<main id="main">
+
+<div class="wrap">
+  <header class="pagehead">
+    <span class="kicker">Roadmap</span>
+    <h1>The cheapest test comes first.</h1>
+    <p class="lede">If the bench can't tell a deliberately bad board from a good one, I'll say so and rethink.</p>
+  </header>
+</div>
+<section class="flush">
+  <div class="wrap"><div class="stats">
+      <div class="stat reveal"><div class="v">31</div><div class="l">deliberately broken designs, each caught by the expected rule</div></div>
+      <div class="stat reveal"><div class="v">17</div><div class="l">catalogue parts, every number tied to a datasheet page</div></div>
+      <div class="stat reveal"><div class="v">14</div><div class="l">engineering rules from the TI datasheet, all enabled</div></div>
+      <div class="stat reveal"><div class="v">0</div><div class="l">DRC and ERC errors on the generated reference board</div></div>
+    </div></div>
+</section>
+<section>
+  <div class="wrap narrow">
+    <ol class="road reveal">
+      <li class="done"><span class="when">NOV 2026 · DONE</span><h3>Language and checks</h3><p>Parts catalogue with datasheet sources, rule checker, KiCad generation with DRC and ERC, first model runs.</p></li>
+      <li class="now"><span class="when">DEC 2026 · NOW</span><h3>Oracle v0 and batch 0</h3><p>The prediction ledger, and one 100 × 100 mm panel with 16 isolated cells: references, known defects, AI designs.</p></li>
+      <li><span class="when">JAN 2027</span><h3>Bench v0 and first results</h3><p>The first measured results, published with every hit and miss.</p></li>
+      <li><span class="when">Q1 2027</span><h3>Open dataset and pilots</h3><p>Design → measurement pairs, and pilots with teams that build or evaluate AI tools for PCB design.</p></li>
+    </ol>
+  </div>
+</section>
+<div class="wrap"><div class="ask reveal">
+    <div>
+      <h2>I'm looking for people to build this with.</h2>
+      <p>If any of this is you, write to me on LinkedIn — <b>Ramil Murat</b>. Code is available to partners on request.</p>
+    </div>
+    <ul>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>A mentor in power electronics</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Teams building or evaluating AI tools for PCB design</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Labs or schools with bench equipment to share</li>
+    </ul>
+  </div></div>
+</main>
+<div class="wrap"><div class="next"><a href="boards.html"><small>Previous</small><span>Boards</span></a><a class="fwd" href="about.html"><small>Next</small><span>About</span></a></div></div>
+<div class="wrap">
+  <footer class="site">
+    <span>Proofboard · Astana, Kazakhstan · Predict before you build. Measure after. Publish the score.</span>
+    <nav aria-label="Footer"><a href="index.html">Home</a><a href="how.html">How it works</a><a href="boards.html">Boards</a><a href="roadmap.html">Roadmap</a><a href="about.html">About</a></nav>
+  </footer>
+</div>
+<script src="assets/site.js" defer></script>
+</body>
+</html>
