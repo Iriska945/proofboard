@@ -57,6 +57,45 @@
   </div>
 </section>
 
+<section id="first-run">
+  <div class="wrap">
+    <div class="head reveal"><span class="kicker">First run · November 2026</span><h2>DeepSeek against the reference.</h2>
+      <p>The first real test of the harness: DeepSeek Flash designed the module twice — placing a fixed circuit (L2) and designing it from scratch (L3). Both passed every hard check. The warnings are where the bench has to decide.</p></div>
+    <div class="trio">
+      <figure class="reveal"><div class="frame contain"><img src="assets/img/top_reference.png" alt="Top view of the reference module layout" loading="lazy" width="700" height="700" style="aspect-ratio:1/1"></div>
+        <h3>Reference</h3><ul class="facts"><li><span>Input loop</span><b>4.80 mm</b></li><li><span>SW loop</span><b>2.54 mm</b></li><li><span>Output</span><b>3.302 V</b></li></ul>
+        <p class="cap">Hand-placed from the TI layout guidance.</p></figure>
+      <figure class="reveal"><div class="frame contain"><img src="assets/img/top_ai_L2.png" alt="Top view of DeepSeek's level 2 layout" loading="lazy" width="700" height="700" style="aspect-ratio:1/1"></div>
+        <h3>DeepSeek · L2</h3><ul class="facts"><li><span>Input loop</span><b class="warn">5.57 mm</b></li><li><span>SW loop</span><b class="warn">4.62 mm</b></li><li><span>Output</span><b>3.303 V</b></li></ul>
+        <p class="cap">Passed on the first try. Same inductor as the reference, its own divider and output caps.</p></figure>
+      <figure class="reveal"><div class="frame contain"><img src="assets/img/top_ai_L3.png" alt="Top view of DeepSeek's level 3 layout" loading="lazy" width="700" height="700" style="aspect-ratio:1/1"></div>
+        <h3>DeepSeek · L3</h3><ul class="facts"><li><span>Input loop</span><b class="warn">9.11 mm</b></li><li><span>SW loop</span><b class="warn">5.01 mm</b></li><li><span>Output</span><b>3.311 V</b></li></ul>
+        <p class="cap">First try had too little input capacitance at 8.4 V; fixed after feedback. Picked a 2.2 µH inductor: 1.57 A ripple at 1 A out.</p></figure>
+    </div>
+    <div class="lessons reveal">
+      <h3>What the run taught us about our own harness</h3>
+      <ul>
+        <li>The first attempt failed for a reason that wasn't the model's: our 8,000-token answer limit cut a reasoning model off mid-thought. Truncated answers are now counted against the harness, not the model.</li>
+        <li>Our 40 % inductor-ripple warning also fires on TI's own recommended 4.7 µH value. That threshold is our rule, not the datasheet's, and needs recalibrating — against measurements.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="jig">
+  <div class="wrap split">
+    <div class="reveal">
+      <span class="kicker">Bench fixture</span>
+      <h2 style="margin:10px 0 16px">A jig for any design.</h2>
+      <p class="muted" style="font-size:18px">Five spring pins press into the module's connector pads from below; a clamp bar presses down on the same strip, so the parts a model places are never touched. Pin positions come from the same constants the harness uses, so every generated board fits.</p>
+      <p class="muted" style="font-size:18px;margin-top:14px">Modelled in OpenSCAD for a school FDM printer, rendered in Blender with DeepSeek's L3 board in the pocket. Not printed yet.</p>
+    </div>
+    <div class="reveal">
+      <div class="viewer"><div class="seg" role="tablist" aria-label="View"><button role="tab" id="jig-t0" aria-controls="jig-p0" aria-selected="true">Assembled</button><button role="tab" id="jig-t1" aria-controls="jig-p1" aria-selected="false" tabindex="-1">Exploded</button></div><div class="panes"><div class="pane" role="tabpanel" id="jig-p0" aria-labelledby="jig-t0"><img src="assets/img/jig_assembled.png" alt="Proofboard Jig v0 assembled, clamp bar over the module connector" loading="eager" style="--ar:4/3"></div><div class="pane" role="tabpanel" id="jig-p1" aria-labelledby="jig-t1" hidden><img src="assets/img/jig_ai_L3_exploded.png" alt="Proofboard Jig v0 exploded: clamp bar, DeepSeek-designed module and five gold spring pins" loading="lazy" style="--ar:4/3"></div></div><p class="cap">Proofboard Jig v0: base, five pogo pins, clamp bar on two M3 screws.</p></div>
+    </div>
+  </div>
+</section>
+
 <section>
   <div class="wrap split">
     <div class="reveal">
