@@ -1,0 +1,894 @@
+{
+ "module": {
+  "id": "buck-tps563201-22x22-v1",
+  "board": 22.0,
+  "free_zone": [
+   4.5,
+   1.0,
+   21.0,
+   21.0
+  ],
+  "bench_connector": {
+   "footprint": "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical",
+   "pos": [
+    2.0,
+    5.92
+   ],
+   "rot": 0,
+   "pins": {
+    "1": "VIN",
+    "2": "GND",
+    "3": "EN",
+    "4": "GND",
+    "5": "VOUT"
+   }
+  },
+  "bench_nets": [
+   "EN",
+   "GND",
+   "VIN",
+   "VOUT"
+  ]
+ },
+ "ic": {
+  "kind": "IC",
+  "id": "IC_TPS563201",
+  "mpn": "TPS563201DDCR",
+  "footprint": "Package_TO_SOT_SMD:SOT-23-6",
+  "electrical": {
+   "switching_frequency_kHz": {
+    "value": 580,
+    "condition": "VIN=12V, VOUT=3.3V, IO=1A",
+    "source": {
+     "doc": "tps563201.pdf",
+     "page": 6,
+     "section": "5.5 Electrical Characteristics, Fsw"
+    }
+   },
+   "vfb_nominal_V": {
+    "value": 0.768,
+    "source": {
+     "doc": "tps563201.pdf",
+     "page": 14,
+     "section": "7.2.2.2 Output Voltage Resistors Selection, Eq.2"
+    }
+   },
+   "vfb_tolerance": {
+    "value_min_V": 0.749,
+    "value_typ_V": 0.768,
+    "value_max_V": 0.787,
+    "value_pct_approx": 2.5,
+    "note": "Диапазон 749/768/787мВ — таблица Electrical Characteristics, continuous-mode, -40..125°C. На стр.1 (Features) отдельно заявлено '2% feedback voltage accuracy (25°C)' — более узкий допуск только при 25°C.",
+    "source": {
+     "doc": "tps563201.pdf",
+     "page": [
+      1,
+      6
+     ],
+     "section": "1 Features; 5.5 Electrical Characteristics, VFBTH"
+    }
+   },
+   "vout_formula": {
+    "formula": "VOUT = 0.768 * (1 + R1/R2)",
+    "source": {
+     "doc": "tps563201.pdf",
+     "page": 14,
+     "section": "7.2.2.2 Output Voltage Resistors Selection, Eq.2"
+    }
+   },
+   "recommended_divider_3v3": {
+    "R1_kOhm": 33.2,
+    "R2_kOhm": 10.0,
+    "source": {
+     "doc": "tps563201.pdf",
+     "page": 15,
+     "section": "Table 7-2. Recommended Component Values, строка VOUT=3.3V"
+    }
+   },
+   "rds_on_high_side_mOhm": {
+    "value_typ": 95,
+    "condition": "TA=25°C, VBST-SW=5V",
+    "source": {
+     "doc": "tps563201.pdf",
+     "page": 6,
+     "section": "5.5 Electrical Characteristics, RDS(on)h"
+    }
+   },
+   "rds_on_low_side_mOhm": {
+    "value_typ": 57,
+    "condition": "TA=25°C",
+    "source": {
+     "doc": "tps563201.pdf",
+     "page": 6,
+     "section": "5.5 Electrical Characteristics, RDS(on)l"
+    }
+   },
+   "quiescent_current_uA": {
+    "value_typ": 120,
+    "value_max": 200,
+    "condition": "IVIN, non-switching, EN=5V, VFB=0.9V, TPS563201",
+    "source": {
+     "doc": "tps563201.pdf",
+     "page": 6,
+     "section": "5.5 Electrical Characteristics, IVIN"
+    }
+   },
+   "shutdown_current_uA": {
+    "value_typ": 8,
+    "value_max": 20,
+    "condition": "EN=0V",
+    "source": {
+     "doc": "tps563201.pdf",
+     "page": 6,
+     "section": "5.5 Electrical Characteristics, IVINSDN"
+    }
+   },
+   "en_threshold_high_V": {
+    "value_min": 1.6,
+    "source": {
+     "doc": "tps563201.pdf",
+     "page": 6,
+     "section": "5.5 Electrical Characteristics, VENH"
+    }
+   },
+   "en_threshold_low_V": {
+    "value_max": 0.8,
+    "source": {
+     "doc": "tps563201.pdf",
+     "page": 6,
+     "section": "5.5 Electrical Characteristics, VENL"
+    }
+   },
+   "en_pulldown_resistance_kOhm": {
+    "value_typ": 1500,
+    "value_min": 600,
+    "value_max": 2400,
+    "condition": "VEN=1.5V",
+    "source": {
+     "doc": "tps563201.pdf",
+     "page": 6,
+     "section": "5.5 Electrical Characteristics, REN"
+    }
+   },
+   "recommended_inductor_3v3_uH": {
+    "value_min": 2.2,
+    "value_typ": 2.2,
+    "value_max": 4.7,
+    "source": {
+     "doc": "tps563201.pdf",
+     "page": 15,
+     "section": "Table 7-2, строка VOUT=3.3V"
+    }
+   },
+   "recommended_output_cap_3v3_uF": {
+    "value_min_total": 20,
+    "value_max_total": 68,
+    "note": "Сумма C8+C9 (две керамики) в референсном дизайне TI; это НОМИНАЛ без учёта просадки от DC bias.",
+    "source": {
+     "doc": "tps563201.pdf",
+     "page": 15,
+     "section": "Table 7-2, столбец C8+C9"
+    }
+   },
+   "input_cap_recommendation": {
+    "value_min_uF": 10,
+    "note": "TI: керамический развязывающий конденсатор >10мкФ, напряжение конденсатора должно быть выше максимального VIN.",
+    "source": {
+     "doc": "tps563201.pdf",
+     "page": 15,
+     "section": "7.2.2.4 Input Capacitor Selection"
+    }
+   },
+   "bst_cap_recommendation_uF": {
+    "value": 0.1,
+    "dielectric": "ceramic",
+    "note": "Обязательный конденсатор между VBST и SW.",
+    "source": {
+     "doc": "tps563201.pdf",
+     "page": 16,
+     "section": "7.2.2.5 Bootstrap Capacitor Selection"
+    }
+   },
+   "theta_ja_C_per_W": {
+    "value": 92.6,
+    "package": "DDC (SOT-23-6), 6 pins",
+    "source": {
+     "doc": "tps563201.pdf",
+     "page": 5,
+     "section": "5.4 Thermal Information, RθJA"
+    }
+   },
+   "theta_jc_top_C_per_W": {
+    "value": 48.5,
+    "source": {
+     "doc": "tps563201.pdf",
+     "page": 5,
+     "section": "5.4 Thermal Information, RθJC(top)"
+    }
+   },
+   "theta_jb_C_per_W": {
+    "value": 15.5,
+    "source": {
+     "doc": "tps563201.pdf",
+     "page": 5,
+     "section": "5.4 Thermal Information, RθJB"
+    }
+   },
+   "current_limit_A": {
+    "value_min": 3.3,
+    "value_typ": 4.2,
+    "value_max": 5.1,
+    "condition": "DC current, VOUT=1.05V, L1=1.5µH",
+    "source": {
+     "doc": "tps563201.pdf",
+     "page": 6,
+     "section": "5.5 Electrical Characteristics, Iocl"
+    }
+   },
+   "uvlo_V": {
+    "wake_up_typ": 4.3,
+    "shutdown_typ": 3.4,
+    "source": {
+     "doc": "tps563201.pdf",
+     "page": 6,
+     "section": "5.5 Electrical Characteristics, UVLO"
+    }
+   }
+  }
+ },
+ "inductors": [
+  {
+   "kind": "L",
+   "id": "L_2R2_1210_PCT322520",
+   "mpn": "PCT322520-2R2-M",
+   "footprint": "Inductor_SMD:L_1210_3225Metric",
+   "inductance_uH": 2.2,
+   "isat_A": 6.5,
+   "irms_A": 5.4,
+   "dcr_mOhm_typ": 36,
+   "dcr_mOhm_max": 43,
+   "source": {
+    "doc": "jierr_pct322520_2r2.pdf",
+    "page": 2
+   }
+  },
+  {
+   "kind": "L",
+   "id": "L_3R3_SRN4018",
+   "mpn": "SRN4018-3R3M",
+   "footprint": "Inductor_SMD:L_Bourns-SRN4018",
+   "inductance_uH": 3.3,
+   "isat_A": 2.3,
+   "irms_A": 2.2,
+   "dcr_mOhm_typ": 66,
+   "dcr_mOhm_max": null,
+   "source": {
+    "doc": "bourns_srn4018.pdf",
+    "page": 1
+   }
+  },
+  {
+   "kind": "L",
+   "id": "L_4R7_SRN4018",
+   "mpn": "SRN4018-4R7M",
+   "footprint": "Inductor_SMD:L_Bourns-SRN4018",
+   "inductance_uH": 4.7,
+   "isat_A": 2.0,
+   "irms_A": 1.9,
+   "dcr_mOhm_typ": 84,
+   "dcr_mOhm_max": null,
+   "source": {
+    "doc": "bourns_srn4018.pdf",
+    "page": 1
+   }
+  },
+  {
+   "kind": "L",
+   "id": "L_6R8_PNR5040_5x5",
+   "mpn": "PNR5040-6R8-M",
+   "footprint": "Inductor_SMD:L_APV_ANR5040",
+   "inductance_uH": 6.8,
+   "isat_A": 3.4,
+   "irms_A": 2.8,
+   "dcr_mOhm_typ": 43,
+   "dcr_mOhm_max": 56,
+   "source": {
+    "doc": "jierr_pnr5040_6r8.pdf",
+    "page": 2
+   }
+  },
+  {
+   "kind": "L",
+   "id": "L_10_SRN6045TA",
+   "mpn": "SRN6045TA-100M",
+   "footprint": "Inductor_SMD:L_Bourns_SRN6045TA",
+   "inductance_uH": 10,
+   "isat_A": 4.6,
+   "irms_A": 3.2,
+   "dcr_mOhm_typ": 52,
+   "dcr_mOhm_max": null,
+   "source": {
+    "doc": "bourns_srn6045ta.pdf",
+    "page": 1
+   }
+  },
+  {
+   "kind": "L",
+   "id": "L_10_SRN4018_BADDCR",
+   "mpn": "SRN4018-100M",
+   "footprint": "Inductor_SMD:L_Bourns-SRN4018",
+   "inductance_uH": 10,
+   "isat_A": 1.4,
+   "irms_A": 1.3,
+   "dcr_mOhm_typ": 180,
+   "dcr_mOhm_max": null,
+   "source": {
+    "doc": "bourns_srn4018.pdf",
+    "page": 1
+   }
+  },
+  {
+   "kind": "L",
+   "id": "L_6R8_SRN2012T_BADISAT_BADDCR",
+   "mpn": "SRN2012T-6R8K",
+   "footprint": "Inductor_SMD:L_0805_2012Metric",
+   "inductance_uH": 6.8,
+   "isat_A": 0.42,
+   "irms_A": 0.7,
+   "dcr_mOhm_typ": 600,
+   "dcr_mOhm_max": null,
+   "source": {
+    "doc": "bourns_srn2012t.pdf",
+    "page": 1
+   }
+  }
+ ],
+ "capacitors": [
+  {
+   "kind": "C",
+   "id": "C_22u_10V_0805_X5R_OUT",
+   "mpn": "GRM21BR61A226ME44L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "capacitance_nominal_uF": 22,
+   "rated_voltage_V": 10,
+   "dielectric": "X5R",
+   "c_eff_uF": {
+    "3.3": 14.7,
+    "5.0": 11.0,
+    "8.4": 5.3
+   },
+   "source": {
+    "doc": "murata_technical/GRM21BR61A226ME44.pdf",
+    "page": 1,
+    "section": "4. Capacitance-DC Bias Characteristics"
+   }
+  },
+  {
+   "kind": "C",
+   "id": "C_47u_10V_1206_X5R_OUT",
+   "mpn": "GRM31CR61A476ME15L",
+   "footprint": "Capacitor_SMD:C_1206_3216Metric",
+   "capacitance_nominal_uF": 47,
+   "rated_voltage_V": 10,
+   "dielectric": "X5R",
+   "c_eff_uF": {
+    "3.3": 30.6,
+    "5.0": 21.2,
+    "8.4": 9.4
+   },
+   "source": {
+    "doc": "murata_technical/GRM31CR61A476ME15.pdf",
+    "page": 1,
+    "section": "4. Capacitance-DC Bias Characteristics"
+   }
+  },
+  {
+   "kind": "C",
+   "id": "C_10u_16V_0805_X5R_OUT",
+   "mpn": "GRM21BR61C106KE15K",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "capacitance_nominal_uF": 10,
+   "rated_voltage_V": 16,
+   "dielectric": "X5R",
+   "c_eff_uF": {
+    "3.3": 8.5,
+    "5.0": 7.2,
+    "8.4": 5.2
+   },
+   "source": {
+    "doc": "murata_technical/GRM21BR61C106KE15.pdf",
+    "page": 1,
+    "section": "4. Capacitance-DC Bias Characteristics"
+   }
+  },
+  {
+   "kind": "C",
+   "id": "C_4u7_16V_0603_X5R_OUT",
+   "mpn": "GRM188R61C475ME11D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "capacitance_nominal_uF": 4.7,
+   "rated_voltage_V": 16,
+   "dielectric": "X5R",
+   "c_eff_uF": {
+    "3.3": 4.1,
+    "5.0": 3.4,
+    "8.4": 2.35
+   },
+   "source": {
+    "doc": "murata_technical/GRM188R61C475ME11.pdf",
+    "page": 1,
+    "section": "4. Capacitance-DC Bias Characteristics"
+   }
+  },
+  {
+   "kind": "C",
+   "id": "C_22u_16V_1206_X5R_OUT",
+   "mpn": "GRM319R61C226KE15D",
+   "footprint": "Capacitor_SMD:C_1206_3216Metric",
+   "capacitance_nominal_uF": 22,
+   "rated_voltage_V": 16,
+   "dielectric": "X5R",
+   "c_eff_uF": {
+    "3.3": 15.4,
+    "5.0": 11.0,
+    "8.4": 5.5
+   },
+   "source": {
+    "doc": "murata_technical/GRM319R61C226KE15.pdf",
+    "page": 1,
+    "section": "4. Capacitance-DC Bias Characteristics"
+   }
+  },
+  {
+   "kind": "C",
+   "id": "C_22u_6V3_0603_X5R_BAD",
+   "mpn": "GRM188R60J226MEA0D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "capacitance_nominal_uF": 22,
+   "rated_voltage_V": 6.3,
+   "dielectric": "X5R",
+   "c_eff_uF": {
+    "3.3": 9.9,
+    "5.0": 5.5,
+    "8.4": null
+   },
+   "source": {
+    "doc": "murata_technical/GRM188R60J226MEA0.pdf",
+    "page": 1,
+    "section": "4. Capacitance-DC Bias Characteristics"
+   }
+  },
+  {
+   "kind": "C",
+   "id": "C_10u_25V_1206_X7R_IN",
+   "mpn": "GRM31CR71E106KA12L",
+   "footprint": "Capacitor_SMD:C_1206_3216Metric",
+   "capacitance_nominal_uF": 10,
+   "rated_voltage_V": 25,
+   "dielectric": "X7R",
+   "c_eff_uF": {
+    "3.3": 10.5,
+    "5.0": 9.5,
+    "8.4": 7.0
+   },
+   "source": {
+    "doc": "murata_technical/GRM31CR71E106KA12.pdf",
+    "page": 1,
+    "section": "4. Capacitance-DC Bias Characteristics"
+   }
+  },
+  {
+   "kind": "C",
+   "id": "C_4u7_25V_0805_X7R_IN",
+   "mpn": "GRM21BR71E475KA73L",
+   "footprint": "Capacitor_SMD:C_0805_2012Metric",
+   "capacitance_nominal_uF": 4.7,
+   "rated_voltage_V": 25,
+   "dielectric": "X7R",
+   "c_eff_uF": {
+    "3.3": 4.98,
+    "5.0": 4.56,
+    "8.4": 3.38
+   },
+   "source": {
+    "doc": "murata_technical/GRM21BR71E475KA73.pdf",
+    "page": 1,
+    "section": "4. Capacitance-DC Bias Characteristics"
+   }
+  },
+  {
+   "kind": "C",
+   "id": "C_100n_50V_0603_X7R_BST",
+   "mpn": "GCM188R71H104KA57D",
+   "footprint": "Capacitor_SMD:C_0603_1608Metric",
+   "capacitance_nominal_uF": 0.1,
+   "rated_voltage_V": 50,
+   "dielectric": "X7R",
+   "c_eff_uF": {
+    "3.3": 0.1,
+    "5.0": 0.1,
+    "8.4": 0.097
+   },
+   "source": {
+    "doc": "murata_technical/GCM188R71H104KA57.pdf",
+    "page": 1,
+    "section": "4. Capacitance-DC Bias Characteristics"
+   }
+  }
+ ],
+ "resistor_rule": {
+  "packages": {
+   "0603": "Resistor_SMD:R_0603_1608Metric",
+   "0805": "Resistor_SMD:R_0805_2012Metric"
+  },
+  "tolerance_pct": 1,
+  "e96": [
+   100,
+   102,
+   105,
+   107,
+   110,
+   113,
+   115,
+   118,
+   121,
+   124,
+   127,
+   130,
+   133,
+   137,
+   140,
+   143,
+   147,
+   150,
+   154,
+   158,
+   162,
+   165,
+   169,
+   174,
+   178,
+   182,
+   187,
+   191,
+   196,
+   200,
+   205,
+   210,
+   215,
+   221,
+   226,
+   232,
+   237,
+   243,
+   249,
+   255,
+   261,
+   267,
+   274,
+   280,
+   287,
+   294,
+   301,
+   309,
+   316,
+   324,
+   332,
+   340,
+   348,
+   357,
+   365,
+   374,
+   383,
+   392,
+   402,
+   412,
+   422,
+   432,
+   442,
+   453,
+   464,
+   475,
+   487,
+   499,
+   511,
+   523,
+   536,
+   549,
+   562,
+   576,
+   590,
+   604,
+   619,
+   634,
+   649,
+   665,
+   681,
+   698,
+   715,
+   732,
+   750,
+   768,
+   787,
+   806,
+   825,
+   845,
+   866,
+   887,
+   909,
+   931,
+   953,
+   976
+  ]
+ },
+ "footprints": {
+  "Capacitor_SMD:C_0603_1608Metric": {
+   "w": 2.96,
+   "h": 1.46,
+   "bbox": [
+    -1.48,
+    -0.73,
+    1.48,
+    0.73
+   ],
+   "pads": {
+    "1": [
+     -0.775,
+     0.0
+    ],
+    "2": [
+     0.775,
+     0.0
+    ]
+   }
+  },
+  "Capacitor_SMD:C_0805_2012Metric": {
+   "w": 3.4,
+   "h": 1.96,
+   "bbox": [
+    -1.7,
+    -0.98,
+    1.7,
+    0.98
+   ],
+   "pads": {
+    "1": [
+     -0.95,
+     0.0
+    ],
+    "2": [
+     0.95,
+     0.0
+    ]
+   }
+  },
+  "Capacitor_SMD:C_1206_3216Metric": {
+   "w": 4.6,
+   "h": 2.3,
+   "bbox": [
+    -2.3,
+    -1.15,
+    2.3,
+    1.15
+   ],
+   "pads": {
+    "1": [
+     -1.475,
+     0.0
+    ],
+    "2": [
+     1.475,
+     0.0
+    ]
+   }
+  },
+  "Connector_PinHeader_2.54mm:PinHeader_1x05_P2.54mm_Vertical": {
+   "w": 3.54,
+   "h": 13.7,
+   "bbox": [
+    -1.77,
+    -1.77,
+    1.77,
+    11.93
+   ],
+   "pads": {
+    "1": [
+     0.0,
+     0.0
+    ],
+    "2": [
+     0.0,
+     2.54
+    ],
+    "3": [
+     0.0,
+     5.08
+    ],
+    "4": [
+     0.0,
+     7.62
+    ],
+    "5": [
+     0.0,
+     10.16
+    ]
+   }
+  },
+  "Inductor_SMD:L_0805_2012Metric": {
+   "w": 3.5,
+   "h": 1.7,
+   "bbox": [
+    -1.75,
+    -0.85,
+    1.75,
+    0.85
+   ],
+   "pads": {
+    "1": [
+     -1.0625,
+     0.0
+    ],
+    "2": [
+     1.0625,
+     0.0
+    ]
+   }
+  },
+  "Inductor_SMD:L_1210_3225Metric": {
+   "w": 4.56,
+   "h": 3.16,
+   "bbox": [
+    -2.28,
+    -1.58,
+    2.28,
+    1.58
+   ],
+   "pads": {
+    "1": [
+     -1.4,
+     0.0
+    ],
+    "2": [
+     1.4,
+     0.0
+    ]
+   }
+  },
+  "Inductor_SMD:L_APV_ANR5040": {
+   "w": 5.6,
+   "h": 5.5,
+   "bbox": [
+    -2.8,
+    -2.75,
+    2.8,
+    2.75
+   ],
+   "pads": {
+    "1": [
+     -1.85,
+     0.0
+    ],
+    "2": [
+     1.85,
+     0.0
+    ]
+   }
+  },
+  "Inductor_SMD:L_Bourns-SRN4018": {
+   "w": 5.06,
+   "h": 4.5,
+   "bbox": [
+    -2.53,
+    -2.25,
+    2.53,
+    2.25
+   ],
+   "pads": {
+    "1": [
+     -1.525,
+     0.0
+    ],
+    "2": [
+     1.525,
+     0.0
+    ]
+   }
+  },
+  "Inductor_SMD:L_Bourns_SRN6045TA": {
+   "w": 7.0,
+   "h": 6.5,
+   "bbox": [
+    -3.5,
+    -3.25,
+    3.5,
+    3.25
+   ],
+   "pads": {
+    "1": [
+     -2.075,
+     0.0
+    ],
+    "2": [
+     2.075,
+     0.0
+    ]
+   }
+  },
+  "Package_TO_SOT_SMD:SOT-23-6": {
+   "w": 4.1,
+   "h": 3.4,
+   "bbox": [
+    -2.05,
+    -1.7,
+    2.05,
+    1.7
+   ],
+   "pads": {
+    "1": [
+     -1.1375,
+     -0.95
+    ],
+    "2": [
+     -1.1375,
+     0.0
+    ],
+    "3": [
+     -1.1375,
+     0.95
+    ],
+    "4": [
+     1.1375,
+     0.95
+    ],
+    "5": [
+     1.1375,
+     0.0
+    ],
+    "6": [
+     1.1375,
+     -0.95
+    ]
+   }
+  },
+  "Resistor_SMD:R_0603_1608Metric": {
+   "w": 2.96,
+   "h": 1.46,
+   "bbox": [
+    -1.48,
+    -0.73,
+    1.48,
+    0.73
+   ],
+   "pads": {
+    "1": [
+     -0.825,
+     0.0
+    ],
+    "2": [
+     0.825,
+     0.0
+    ]
+   }
+  },
+  "Resistor_SMD:R_0805_2012Metric": {
+   "w": 3.36,
+   "h": 1.9,
+   "bbox": [
+    -1.68,
+    -0.95,
+    1.68,
+    0.95
+   ],
+   "pads": {
+    "1": [
+     -0.9125,
+     0.0
+    ],
+    "2": [
+     0.9125,
+     0.0
+    ]
+   }
+  }
+ }
+}

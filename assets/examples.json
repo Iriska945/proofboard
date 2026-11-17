@@ -1,0 +1,266 @@
+{
+ "reference": {
+  "ir_version": 1,
+  "module": "buck-tps563201-22x22-v1",
+  "parts": [
+   {
+    "ref": "U1",
+    "part": "IC_TPS563201",
+    "x": 12.5,
+    "y": 9.125,
+    "rot": 0,
+    "pins": {
+     "1": "GND",
+     "2": "SW",
+     "3": "VIN",
+     "4": "FB",
+     "5": "EN",
+     "6": "BST"
+    }
+   },
+   {
+    "ref": "L1",
+    "part": "L_4R7_SRN4018",
+    "x": 7.3,
+    "y": 9.125,
+    "rot": 180,
+    "pins": {
+     "1": "SW",
+     "2": "VOUT"
+    }
+   },
+   {
+    "ref": "C1",
+    "part": "C_100n_50V_0603_X7R_BST",
+    "x": 12.5,
+    "y": 6.3,
+    "rot": 0,
+    "pins": {
+     "1": "SW",
+     "2": "BST"
+    }
+   },
+   {
+    "ref": "C2",
+    "part": "C_10u_25V_1206_X7R_IN",
+    "x": 12.5,
+    "y": 12.2,
+    "rot": 0,
+    "pins": {
+     "1": "VIN",
+     "2": "GND"
+    }
+   },
+   {
+    "ref": "C5",
+    "part": "C_10u_25V_1206_X7R_IN",
+    "x": 12.5,
+    "y": 14.9,
+    "rot": 0,
+    "pins": {
+     "1": "VIN",
+     "2": "GND"
+    }
+   },
+   {
+    "ref": "C3",
+    "part": "C_22u_10V_0805_X5R_OUT",
+    "x": 6.3,
+    "y": 3.3,
+    "rot": 0,
+    "pins": {
+     "1": "GND",
+     "2": "VOUT"
+    }
+   },
+   {
+    "ref": "C4",
+    "part": "C_22u_10V_0805_X5R_OUT",
+    "x": 6.3,
+    "y": 5.6,
+    "rot": 0,
+    "pins": {
+     "1": "GND",
+     "2": "VOUT"
+    }
+   },
+   {
+    "ref": "R1",
+    "part": "R0603:33k2",
+    "x": 17.0,
+    "y": 9.0,
+    "rot": 180,
+    "pins": {
+     "1": "VOUT",
+     "2": "FB"
+    }
+   },
+   {
+    "ref": "R2",
+    "part": "R0603:10k",
+    "x": 17.0,
+    "y": 11.0,
+    "rot": 0,
+    "pins": {
+     "1": "FB",
+     "2": "GND"
+    }
+   },
+   {
+    "ref": "R3",
+    "part": "R0603:68k1",
+    "x": 17.0,
+    "y": 5.0,
+    "rot": 0,
+    "pins": {
+     "1": "VIN",
+     "2": "EN"
+    }
+   },
+   {
+    "ref": "R4",
+    "part": "R0603:27k4",
+    "x": 17.0,
+    "y": 3.0,
+    "rot": 0,
+    "pins": {
+     "1": "EN",
+     "2": "GND"
+    }
+   }
+  ],
+  "notes": "WP1 reference design: TPS563201, L_4R7_SRN4018 (4.7uH), 2x C_10u_25V_1206_X7R_IN input caps (one 10uF/25V cap alone gives only 7.0uF effective at 8.4V, below the 10uF datasheet minimum -- see docs/CATALOG.md section 3 -- two in parallel give 14.0uF), 2x C_22u_10V_0805_X5R_OUT output caps, C_100n_50V_0603_X7R_BST bootstrap cap, R0603:33k2/R0603:10k feedback divider (TI Table 7-2 values), R0603:68k1/R0603:27k4 EN divider (chosen so EN crosses VENH(min)=1.6V already by VIN=5.58V, safely below the 6.4V discharged-battery floor; R_EN1=100k/R_EN2=27k from the pre-WP1 harness would only turn on above 7.44V, which is why they changed)."
+ },
+ "deepseek": {
+  "ir_version": 1,
+  "module": "buck-tps563201-22x22-v1",
+  "parts": [
+   {
+    "ref": "U1",
+    "part": "IC_TPS563201",
+    "x": 12.0,
+    "y": 10.0,
+    "rot": 0,
+    "pins": {
+     "1": "GND",
+     "2": "SW",
+     "3": "VIN",
+     "4": "FB",
+     "5": "EN",
+     "6": "BST"
+    }
+   },
+   {
+    "ref": "L1",
+    "part": "L_4R7_SRN4018",
+    "x": 17.0,
+    "y": 10.3,
+    "rot": 0,
+    "pins": {
+     "1": "SW",
+     "2": "VOUT"
+    }
+   },
+   {
+    "ref": "C1",
+    "part": "C_100n_50V_0603_X7R_BST",
+    "x": 13.5,
+    "y": 7.0,
+    "rot": 0,
+    "pins": {
+     "1": "SW",
+     "2": "BST"
+    }
+   },
+   {
+    "ref": "C2",
+    "part": "C_10u_25V_1206_X7R_IN",
+    "x": 7.2,
+    "y": 5.8,
+    "rot": 0,
+    "pins": {
+     "1": "VIN",
+     "2": "GND"
+    }
+   },
+   {
+    "ref": "C5",
+    "part": "C_10u_25V_1206_X7R_IN",
+    "x": 7.2,
+    "y": 8.8,
+    "rot": 0,
+    "pins": {
+     "1": "VIN",
+     "2": "GND"
+    }
+   },
+   {
+    "ref": "C3",
+    "part": "C_22u_16V_1206_X5R_OUT",
+    "x": 17.0,
+    "y": 14.5,
+    "rot": 0,
+    "pins": {
+     "1": "GND",
+     "2": "VOUT"
+    }
+   },
+   {
+    "ref": "C4",
+    "part": "C_22u_16V_1206_X5R_OUT",
+    "x": 17.0,
+    "y": 17.2,
+    "rot": 0,
+    "pins": {
+     "1": "GND",
+     "2": "VOUT"
+    }
+   },
+   {
+    "ref": "R1",
+    "part": "R0603:102k",
+    "x": 12.0,
+    "y": 13.7,
+    "rot": 0,
+    "pins": {
+     "1": "VOUT",
+     "2": "FB"
+    }
+   },
+   {
+    "ref": "R2",
+    "part": "R0603:30k9",
+    "x": 12.0,
+    "y": 15.7,
+    "rot": 0,
+    "pins": {
+     "1": "FB",
+     "2": "GND"
+    }
+   },
+   {
+    "ref": "R3",
+    "part": "R0603:100k",
+    "x": 7.2,
+    "y": 12.0,
+    "rot": 0,
+    "pins": {
+     "1": "VIN",
+     "2": "EN"
+    }
+   },
+   {
+    "ref": "R4",
+    "part": "R0603:49k9",
+    "x": 7.2,
+    "y": 14.0,
+    "rot": 0,
+    "pins": {
+     "1": "EN",
+     "2": "GND"
+    }
+   }
+  ],
+  "notes": "DeepSeek Flash design from runs/flash2_20261117/L2/tt-deepseek-flash/attempt_1/iter_1, re-checked after the GND routing fix"
+ }
+}

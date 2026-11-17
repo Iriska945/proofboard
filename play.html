@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Try it · Proofboard</title>
+<meta name="description" content="Design a 3.3 V buck module yourself and watch the Proofboard rule checker score it live.">
+<meta property="og:title" content="Try it · Proofboard">
+<meta property="og:description" content="Design a 3.3 V buck module yourself and watch the Proofboard rule checker score it live.">
+<meta property="og:image" content="assets/img/batch0_panel.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg viewBox='0 0 32 32' aria-hidden='true'%3E%3Crect x='2.5' y='2.5' width='27' height='27' rx='7' fill='%231e3a5f'/%3E%3Cpath d='M8.5 21.5h6l3-11h6' stroke='%23f6ead2' stroke-width='2.2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='8.5' cy='21.5' r='2.4' fill='%23e3a94e'/%3E%3Ccircle cx='23.5' cy='10.5' r='2.4' fill='%23e3a94e'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="wrap">
+  <nav class="nav" aria-label="Main">
+    <a class="brand" href="index.html" aria-label="Proofboard home"><svg viewBox="0 0 32 32" aria-hidden="true"><rect x="2.5" y="2.5" width="27" height="27" rx="7" fill="#1e3a5f"/><path d="M8.5 21.5h6l3-11h6" stroke="#f6ead2" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8.5" cy="21.5" r="2.4" fill="#e3a94e"/><circle cx="23.5" cy="10.5" r="2.4" fill="#e3a94e"/></svg>Proofboard</a>
+    <ul>
+      <li><a href="play.html" aria-current="page">Try it</a></li>
+      <li><a href="how.html">How it works</a></li>
+      <li><a href="boards.html">Lab</a></li>
+      <li><a href="roadmap.html">Roadmap</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+</div>
+<main id="main">
+
+<div class="wrap">
+  <header class="pagehead">
+    <span class="kicker">PLAYGROUND · BEAT THE AI</span>
+    <h1>Can you design a better power board than DeepSeek?</h1>
+    <p class="lede">This tiny 22 × 22 mm board turns a 7.4 V battery into the 3.3 V a microcontroller needs. Pick the parts, place them on the board, and our checker tells you — in plain words — whether it would work.</p>
+  </header>
+</div>
+
+<section class="flush">
+  <div class="wrap">
+    <div class="schema" role="img" aria-label="Battery 6.4 to 8.4 volts feeds the converter chip, which drives the coil, making a steady 3.3 volt output"><div class="schema-block">Battery 6.4–8.4 V</div><div class="schema-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div><div class="schema-block">Converter chip</div><div class="schema-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div><div class="schema-block">Coil</div><div class="schema-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div><div class="schema-block">3.3 V out</div></div>
+    <p class="schema-note muted">+ capacitors that keep the voltage steady, + two resistors that set 3.3 V</p>
+  </div>
+</section>
+
+<section class="flush">
+  <div class="wrap" id="playRoot">
+    <div class="scoreboard" id="scoreboard" aria-label="Scoreboard: your board versus DeepSeek">
+      <div class="score-row score-head"><span></span><span>Your board</span><span>DeepSeek</span></div>
+      <div class="score-row"><span class="score-label">Rules</span><span id="scoreYouRules">—</span><span>5 of 6 designs passed</span></div>
+      <div class="score-row"><span class="score-label">Input loop</span><span id="scoreYouLoop">—</span><span>9.1 mm</span></div>
+      <div class="score-row"><span class="score-label">Output</span><span id="scoreYouVout">—</span><span>3.31 V</span></div>
+    </div>
+
+    <div class="tryit" role="group" aria-label="Try this">
+      <button type="button" class="btn ghost" data-action="break-it">Break it: pick the tiny coil</button>
+      <button type="button" class="btn ghost" data-action="move-cap">Move a capacitor away from the chip</button>
+      <button type="button" class="btn ghost" data-action="load-ai">Load DeepSeek's design</button>
+      <button type="button" class="btn ghost" data-action="reset">Reset to reference</button>
+    </div>
+
+    <div class="play" id="play">
+      <div class="board-col">
+        <div class="board-toolbar">
+          <div class="toolbar-actions">
+            <button type="button" class="icon-btn" id="rotateBtn" data-action="rotate" disabled>Rotate (R)</button>
+          </div>
+        </div>
+        <div class="board-wrap">
+          <svg id="boardSvg" role="img" aria-label="Board editor: 22 by 22 millimetre module, drag parts to place them"></svg>
+        </div>
+        <p class="board-hint">Drag a part to move it, or tab to one and use the arrow keys (0.05 mm, hold Shift for 0.5 mm). Press <kbd>R</kbd> or the button above to rotate the selected part 90°.</p>
+        <div id="loopLegend" class="loop-keys" aria-live="polite"></div>
+        <p class="loop-legend muted">Short loops = quiet board. Drag the parts and watch the lines.</p>
+      </div>
+
+      <div class="side-col">
+        <div class="panel verdict-panel">
+          <h2 class="verdict-headline" id="verdictHeadline" aria-live="polite">Loading…</h2>
+          <div id="problemsList" class="problems-list"></div>
+          <p class="muted t1-note">This is a rules check, not a measurement. Nothing here has been built yet.</p>
+          <div class="metrics-compact" id="metricsCompact"></div>
+        </div>
+        <div class="panel parts-panel">
+          <h2>Parts</h2>
+          <div id="cardsList" class="cards-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions playbar">
+      <button type="button" class="btn ghost" data-action="share">Share</button>
+      <span id="shareNote" class="muted" role="status" hidden style="align-self:center;font-size:14px"></span>
+    </div>
+
+    <div class="panel submit-section">
+      <h2>Submit to Batch 1</h2>
+      <p class="muted">One submission per visitor. We only need a name for the silkscreen, and an email is optional if you want the measured results.</p>
+      <form id="submitForm">
+        <div class="field"><label for="silkname">Silkscreen name (≤12 Latin letters)</label><input id="silkname" name="silkname" maxlength="12" pattern="[A-Za-z]{1,12}" required></div>
+        <div class="field"><label for="subemail">Email (optional)</label><input id="subemail" name="email" type="email"></div>
+        <button type="submit" class="btn primary">Submit design</button>
+      </form>
+      <p class="submit-note" id="submitNote"></p>
+    </div>
+  </div>
+</section>
+</main>
+<div class="wrap"><div class="next"><a href="index.html"><small>Previous</small><span>Home</span></a><a class="fwd" href="how.html"><small>Next</small><span>How it works</span></a></div></div>
+<div class="wrap">
+  <footer class="site">
+    <span>Proofboard · Astana, Kazakhstan · Predict before you build. Measure after. Publish the score.</span>
+    <nav aria-label="Footer"><a href="index.html">Home</a><a href="play.html">Try it</a><a href="how.html">How it works</a><a href="boards.html">Lab</a><a href="roadmap.html">Roadmap</a><a href="about.html">About</a></nav>
+  </footer>
+</div>
+<script src="assets/site.js" defer></script>
+<script src="assets/play.js"></script>
+</body>
+</html>
